@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 14:53:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/20 13:22:22 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/04/12 12:09:47 by marvin            #+#    #+#             */
+/*   Updated: 2025/04/20 13:50:25 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
+char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	t_list	*elemt;
+	size_t			i;
+	unsigned char	*str;
+	size_t			s_len;
 
-	elemt = (t_list *)malloc(sizeof(t_list));
-	if (!elemt)
+	if (!s)
 		return (NULL);
-	elemt->content = content;
-	elemt->next = NULL;
-	return (elemt);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (ft_strdup(""));
+	if (len > s_len - start)
+		len = s_len - start;
+	str = malloc(sizeof(unsigned char) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
