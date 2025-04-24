@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:02:26 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/20 13:40:09 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:19:01 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	else
 	{
-		i = 0;
-		while (i < len)
+		i = -1;
+		while (i++ < len)
 		{
-			ptr_dst[i++] = ptr_src[i];
+			ptr_dst[i] = ptr_src[i];
 		}
 	}
 	return (dst);

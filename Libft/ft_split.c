@@ -6,56 +6,52 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:41:53 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/20 13:53:57 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/24 12:13:23 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	word_count(const char *str, char c)
+int	count_word(char const *str, char c)
 {
 	int	count;
+	int	in_word;
 
 	count = 0;
+	in_word = 0;
 	while (*str)
 	{
-		while (*str == c)
-			str++;
-		if (*str)
+		if (in_word == 0 && *str != c)
 		{
+			in_word = 1;
 			count++;
-			while (*str && *str != c)
-				str++;
 		}
+		else if (in_word == 1 && *str == c)
+			in_word = 0;
+		str++;
 	}
 	return (count);
 }
 
-static char	*word_dup(const char *str, char c)
+int	next_charset(char const *s, char c)
 {
-	int		len;
-	char	*word;
+	int	len;
 
 	len = 0;
-	while (str[len] && str[len] != c)
-		len++;
-	word = malloc(len + 1);
-	if (!word)
-		return (NULL);
-	ft_strlcpy(word, str, len + 1);
-	return (word);
+	while (s[len] && s[len] != c)
+				len++;
+	return (len);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	int		words;
 	char	**result;
 	int		i;
+	int		len;
 
 	if (!s)
 		return (NULL);
-	words = word_count(s, c);
-	**result = malloc((words + 1) * sizeof(char *));
+	result = malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -65,19 +61,12 @@ char	**ft_split(const char *s, char c)
 			s++;
 		if (*s)
 		{
-			result[i] = word_dup(s, c);
-			if (!result[i])
-			{
-				while (i--)
-					free(result[i]);
-				free(result);
+			len = next_charset(s, c);
+			result[i] = ft_substr(s, 0, len);
+			if (!result[i++])
 				return (NULL);
-			}
-			i++;
-			while (*s && *s != c)
-				s++;
+			s += len;
 		}
 	}
-	result[i] = NULL;
 	return (result);
 }

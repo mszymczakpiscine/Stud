@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:32:34 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/20 13:26:08 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:15:10 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_putstr_fd(char *str, int fd)
 
 	i = 0;
 	if (!str)
-		return (NULL);
+		return ;
 	while (str[i])
 	{
 		write(fd, &str[i], 1);
