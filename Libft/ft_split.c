@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:41:53 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/24 12:13:23 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:44:44 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,3 +70,16 @@ char	**ft_split(char const *s, char c)
 	}
 	return (result);
 }
+/*int	main()
+{
+	char	**tab;
+	int	i = 0;
+	
+	tab = ft_split("xxxxxxxxhello!", 'x');
+	while (tab[i])
+	{
+		printf("%s\n", tab[i]);
+		i++;
+	}
+	return (0);
+}*/
