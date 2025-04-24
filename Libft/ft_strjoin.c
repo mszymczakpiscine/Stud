@@ -6,24 +6,12 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 16:42:03 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/24 14:24:57 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:36:03 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
 
-/*size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-		len++;
-	return (len);
-}*/
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	char	*res;
@@ -39,12 +27,12 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		res[j++] = s1[i++];
 	i = 0;
 	while (s2[i])
-		res[j++] = s2[i++];
+		res[j++] = s2[i];
 	res[j] = 0;
 	return (res);
 }
-/*
-int	main(void)
+
+/*int	main(void)
 {
 	const char	*s1 = "Hello, ";
 	const char	*s2 = "World!";

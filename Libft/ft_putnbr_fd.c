@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 13:40:01 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/20 13:33:30 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:37:09 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	unsigned int	nbr;
-
+	
+	nbr = 0;
 	if (n == -2147483648)
 		write(fd, "-2147483648", 11);
 	else if (n < 0)

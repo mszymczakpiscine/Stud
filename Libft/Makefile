@@ -1,6 +1,6 @@
 NAME	=	libft.a
 
-CFLAGS	=	-Wall -Wextra -Werror
+FLAG	=	-Wall -Wextra -Werror
 
 FILES	=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
 			ft_memchr.c ft_memcmp.c ft_strlen.c ft_strlcpy.c ft_strlcat.c \
@@ -15,30 +15,25 @@ BONUS_FILES	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
 				ft_lstmap.c
 
 OBJ			=	$(FILES:.c=.o)
-BONUS_OBJ	=	$(BONUS_FILES:.c=.o)
+BONUS_OBJ	=	$(OBJ) $(BONUS_FILES:.c=.o)
 RM			=	rm -f
 
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-	ar rcs $@ $(OBJ)
-	echo "$(NAME) created"
-	echo "$(NAME) indexed"
-
-$(OBJ):		$(FILES)
-	cc -c $(FLAG) $(FILES)
+	ar rcs $(NAME) $(OBJ)
 
 bonus:		$(BONUS_OBJ)
-	cc -c $(FLAG) $(BONUS_OBJ)
-	ar rcs $(NAME) $(BONUS_OBJ)
- 
+	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
+
+%.o:%.c
+	cc $(FLAG) -o $@ -c $<
+
 clean:
 	$(RM) $(OBJ) $(BONUS_OBJ)
-	echo "OBJ deleted"
 
 fclean:		clean
 	$(RM) $(NAME)
-	echo "$(NAME) deleted"
 
 re:			fclean all
 
