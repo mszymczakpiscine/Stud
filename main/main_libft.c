@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_libft.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:06:50 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/25 13:04:32 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:18:23 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int    main(void)
     char    *s;
 
     printf("==== Partie 1 ====\n");
-    printf("ft_isalpha('A') : %d\n", ft_isalpha('A'));
+    printf("ft_isalpha('A') : %d\n", ft_isalpha('-'));
     printf("ft_isdigit('4') : %d\n", ft_isdigit('4'));
     printf("ft_isalnum('3') : %d\n", ft_isalnum('3'));
     printf("ft_isascii(127) : %d\n", ft_isascii(127));
     printf("ft_isprint(' ') : %d\n", ft_isprint(' '));
-    printf("ft_strlen(\"42\") : %zu\n", ft_strlen("42"));
+    printf("ft_strlen(\"42\") : %zu\n", ft_strlen(NULL));
     printf("ft_memcpy : %s\n", (char *)ft_memcpy(dest1, " World!", 7));
     printf("ft_strlcpy : %zu\n", ft_strlcpy(dest2, "Salut", 20));
     printf("ft_strlcat : %zu\n", ft_strlcat(dest3, " Bro", 20));
