@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 16:06:50 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/25 12:33:51 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:04:32 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int    main(void)
     ft_lstadd_back(&head, ft_lstnew("End"));
     printf("After ft_lstadd_back (last) : %s\n", (char *)ft_lstlast(head)->content);
 
-    printf("Use ft_lstiter to print list:\n");
+    printf("print list:\n");
     tmp = head;
     while (tmp)
     {
