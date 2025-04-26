@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 15:53:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/25 16:14:58 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/26 11:20:49 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,25 @@
 #include <stdarg.h>
 #include <unistd.h>
 
-void	ft_putchar(char c)
+int	ft_printf(const char *format, ...)
 {
-	write(1, &c, 1);
-}
-void	ft_putnbr(int nbr)
-{
-	if (nb == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		return ;
-	}
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb = -nb;
-	}
-	if (nb > 0)
-	{
-		ft_putnbr(nb / 10);
-	}
-	ft_putchar(nb % 10 + '0');
-}
-void 	ft_putstr(char *str)
-{
-	int	i;
+	va_list	args;
+	int		i;
+	int		len;
 
+	va_start(args, format);
 	i = 0;
-	if (!str)
-		return ;
-	while (str[i])
+	len = 0;
+	while (format[i])
 	{
-		write(1, &str[i++], 1);
-	}		
+		if (format[i] == '%' && format[i + 1])
+		{
+			i++;
+			if (format[i] == 'c')
+				len += ft_putchar(va_arg(args, int));
+			else if (format[i] == 's')
+				len += ft_putstr(va_arg(args, char *));
+			
+		}
+	}
 }
-int	ft_printf(const char *, ...)
