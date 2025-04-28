@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:41:53 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/24 14:44:44 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:38:47 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ int	next_charset(char const *s, char c)
 	return (len);
 }
 
+void	free_tab(char **result, int i)
+{
+	while (i)
+	{
+		free(result[i]);
+		i--;
+	}
+	free(result);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**result;
@@ -63,8 +73,9 @@ char	**ft_split(char const *s, char c)
 		{
 			len = next_charset(s, c);
 			result[i] = ft_substr(s, 0, len);
-			if (!result[i++])
-				return (NULL);
+			if (!result[i])
+				return (free_tab(result, i), NULL);
+			i++;
 			s += len;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:05:42 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/20 13:46:45 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/28 10:28:45 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
-	if (!lst || !new)
+	if (!lst || !new || !*lst)
 		return ;
 	if (*lst == NULL)
 	{
