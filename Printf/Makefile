@@ -1,34 +1,24 @@
-NAME	=	libftprintf.a
+# Makefile
 
-FLAG	=	-Wall -Wextra -Werror
+NAME = ft_printf.a
 
-FILES	=	
+SRCS = ft_printf.c utils/ft_putchar.c utils/ft_putstr.c utils/ft_putnbr.c utils/ft_putnbr_unsigned.c utils/ft_puthex.c utils/ft_putptr.c
+OBJS = $(SRCS:.c=.o)
 
-#BONUS_FILES	= 
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -I.
 
-OBJ			=	$(FILES:.c=.o)
-#BONUS_OBJ	=	$(OBJ) $(BONUS_FILES:.c=.o)
-RM			=	rm -f
+all: $(NAME)
 
-all:		$(NAME)
-
-$(NAME):	$(OBJ)
-	ar rcs $(NAME) $(OBJ)
-	cc $(FLAG) *.o
-
-#bonus:		$(BONUS_OBJ)
-#	ar rcs $(NAME) $(OBJ) $(BONUS_OBJ)
-#	cc $(FLAG) *.o
-
-%.o:%.c
-	cc $(FLAG) -o $@ -c $<
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJ) $(BONUS_OBJ)
+	rm -f $(OBJS)
 
-fclean:		clean
-	$(RM) $(NAME)
+fclean: clean
+	rm -f $(NAME)
 
-re:			fclean all
+re: fclean all
 
-.PHONY: all, clean, fclean, re, #bonus
+.PHONY: all clean fclean re

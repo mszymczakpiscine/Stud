@@ -6,7 +6,7 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 19:00:28 by codespace         #+#    #+#              #
-#    Updated: 2025/04/28 19:00:31 by codespace        ###   ########.fr        #
+#    Updated: 2025/04/28 19:31:25 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,10 @@
 # ====================================================
 
 # 🧱 Configuration
-NAME     := test_all
+NAME     := test_all_printf
 CC       := gcc
 CFLAGS   := -Wall -Wextra -Werror
-SRC      := ft_printf.c test_all.c
+SRC      := ft_printf.c ft_puthex.c ft_putnbr_u.c ft_putptr.c test_all_printf.c
 
 # 🎨 Couleurs
 YELLOW   := \033[0;33m
