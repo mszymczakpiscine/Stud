@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/12 13:32:34 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/28 10:50:46 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/04/28 15:14:27 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/04/28 16:23:18 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-void	ft_putstr_fd(char *str, int fd)
+int	read_and_stock(int fd, char **stock)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return ;
-	while (str[i])
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
+	char	*buffer;
+	size_t	
 }
