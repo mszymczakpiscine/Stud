@@ -6,19 +6,28 @@
 #    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/28 19:00:28 by codespace         #+#    #+#              #
-#    Updated: 2025/04/28 19:31:25 by codespace        ###   ########.fr        #
+#    Updated: 2025/04/28 20:10:50 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ====================================================
-#                FT_PRINTF TEST MAKEFILE
+#                FT_PRINTF MAKEFILE
 # ====================================================
 
 # 🧱 Configuration
 NAME     := test_all_printf
 CC       := gcc
 CFLAGS   := -Wall -Wextra -Werror
-SRC      := ft_printf.c ft_puthex.c ft_putnbr_u.c ft_putptr.c test_all_printf.c
+SRC_DIR  := utils
+SRC      := \
+    $(SRC_DIR)/ft_printf.c \
+    $(SRC_DIR)/ft_putchar.c \
+    $(SRC_DIR)/ft_putstr.c \
+    $(SRC_DIR)/ft_putnbr.c \
+    $(SRC_DIR)/ft_putnbr_unsigned.c \
+    $(SRC_DIR)/ft_puthex.c \
+    $(SRC_DIR)/ft_putptr.c \
+    test_all_printf.c
 
 # 🎨 Couleurs
 YELLOW   := \033[0;33m
@@ -29,7 +38,7 @@ RESET    := \033[0m
 # 🔧 Compilation
 $(NAME): $(SRC)
 	@echo "$(YELLOW)[Compiling]$(RESET) Building $(NAME)..."
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+	@$(CC) $(CFLAGS) -I$(SRC_DIR) $(SRC) -o $(NAME)
 	@echo "$(GREEN)[OK]$(RESET) Compilation terminée."
 
 # ▶️ Exécution des tests
