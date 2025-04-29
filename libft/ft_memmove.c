@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 22:02:26 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/28 17:45:17 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/04/29 09:57:06 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,30 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char	*ptr_dst;
-	unsigned char	*ptr_src;
-	size_t			i;
-	int				sign;
+	size_t		i;
+	char		*d;
+	const char	*s;
 
-	if (!dst || !src)
+	if (!dst && !src)
 		return (NULL);
-	(ptr_dst = (unsigned char *)dst, ptr_src = (unsigned char *)src);
-	if (ptr_dst > ptr_src)
+	d = (char *)dst;
+	s = (const char *)src;
+	if (d < s)
 	{
-		i = len;
-		sign = -1;
+		i = 0;
+		while (i < len)
+		{
+			d[i] = s[i];
+			i++;
+		}
 	}
 	else
 	{
-		i = 0;
-		sign = 1;
-	}
-	while (len)
-	{
-		i += sign;
-		ptr_dst[i] = ptr_src[i];
-		len--;
+		while (len--)
+			d[len] = s[len];
 	}
 	return (dst);
 }
-
-
 //int main()
 //{
 //	char	src[] = "lorem ipsum dolor sit amet";
@@ -55,4 +51,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 //	printf("%s\n", dest);
 
 //}
-
