@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:21:08 by codespace         #+#    #+#             */
-/*   Updated: 2025/04/28 19:21:14 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/29 11:12:45 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
+
+int	ft_putchar(char c);
 
 int	ft_putptr(unsigned long n)
 {

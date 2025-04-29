@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:44:34 by codespace         #+#    #+#             */
-/*   Updated: 2025/04/28 19:44:36 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/29 11:10:54 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int ft_putchar(char c);
 
 int ft_putnbr(int n)
 {

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 19:20:37 by codespace         #+#    #+#             */
-/*   Updated: 2025/04/28 19:20:46 by codespace        ###   ########.fr       */
+/*   Updated: 2025/04/29 11:10:31 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
+
+int	ft_putchar(char c);
 
 int	ft_puthex(unsigned int n, char format)
 {
