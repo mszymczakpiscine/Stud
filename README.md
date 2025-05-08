@@ -20,7 +20,7 @@ Voici comment créer un alias pour votre script de test, ce qui vous permettra d
 Méthode 1 (temporaire - pour la session courante)
 
 Ouvrez votre terminal et tapez :
-bash
+
 
     alias tester42='/chemin/vers/votre/42tester_enhanced.sh'
 
@@ -31,13 +31,13 @@ Pour bash (le shell le plus courant) :
 
 Ouvrez votre fichier ~/.bashrc ou ~/.bash_aliases :
 
-bash
 
-    nano ~/.bashrc
+
+    vim ~/.bashrc
 
 Ajoutez cette ligne à la fin du fichier :
 
-bash
+
 
     alias tester42='/chemin/vers/votre/42tester_enhanced.sh'
 
@@ -45,7 +45,6 @@ Sauvegardez (Ctrl+O) et quittez (Ctrl+X)
 
 Appliquez les changements :
 
-bash
 
     source ~/.bashrc
 
@@ -53,13 +52,13 @@ Pour zsh :
 
 Ouvrez votre fichier ~/.zshrc :
 
-bash
 
-    nano ~/.zshrc
+
+    vim ~/.zshrc
 
 Ajoutez la même ligne :
 
-bash
+
 
     alias tester42='/chemin/vers/votre/42tester_enhanced.sh'
 
@@ -67,14 +66,14 @@ Sauvegardez et quittez
 
 Appliquez les changements :
 
-bash
+
 
     source ~/.zshrc
 
 Comment utiliser l'alias
 
 Une fois configuré, vous pouvez simplement taper :
-bash
+
 
     tester42
 
