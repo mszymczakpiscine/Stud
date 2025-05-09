@@ -1,6 +1,6 @@
 # Stud
 
-Comment utiliser le script (en cours d'amelioration car plusieurs bug) :
+Comment utiliser le script  :
 
 Sauvegardez le script dans un fichier 42tester_enhanced.sh
 
