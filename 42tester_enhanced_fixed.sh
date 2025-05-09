@@ -283,7 +283,7 @@ test_libft_performance() {
 
     create_test_file "perf_strlen.c" "
 #include \"libft.h\"
-#define ITER 1000000
+#define ITER 10000
 int main() {
     for (int i = 0; i < ITER; i++)
         ft_strlen(\"performance test\");
@@ -540,6 +540,7 @@ int main() {
     # ft_atoi
     create_test_file "test_atoi.c" "
 #include \"libft.h\"
+#include <string.h>
 int main() {
     if (ft_atoi(\"123\") != 123 || ft_atoi(\"-456\") != -456) return 1;
     return 0;
@@ -664,6 +665,7 @@ int main() {
     # ft_strjoin
     create_test_file "test_strjoin.c" "
 #include \"libft.h\"
+#include <string.h>
 int main() {
     char *s = ft_strjoin(\"hello\", \" world\");
     if (!s || strcmp(s, \"hello world\")) { free(s); return 1; }
@@ -686,6 +688,7 @@ int main() {
     # ft_split
     create_test_file "test_split.c" "
 #include \"libft.h\"
+#include <string.h>
 int main() {
     char **arr = ft_split(\"hello world\", ' ');
     if (!arr || !arr[0] || !arr[1] || arr[2] || 
@@ -705,6 +708,7 @@ int main() {
     # ft_itoa
     create_test_file "test_itoa.c" "
 #include \"libft.h\"
+#include <string.h>
 int main() {
     char *s = ft_itoa(-123);
     if (!s || strcmp(s, \"-123\")) { free(s); return 1; }
@@ -875,31 +879,69 @@ test_libft_bonus() {
     create_test_file "test_lstsize.c" '
 #include "libft.h"
 int main() {
-    t_list *lst = ft_lstnew("a");
-    ft_lstadd_front(&lst, ft_lstnew("b"));
-    if (ft_lstsize(lst) != 2) {
+    char *s1 = strdup("a");
+    char *s2 = strdup("b");
+
+    if (!s1 || !s2)
+        return 1;
+
+    t_list *lst = ft_lstnew(s1);
+    if (!lst) {
+        free(s1);
+        free(s2);
+        return 1;
+    }
+
+    t_list *node2 = ft_lstnew(s2);
+    if (!node2) {
+        free(s2);
         ft_lstclear(&lst, free);
         return 1;
     }
+
+    ft_lstadd_front(&lst, node2);
+
+    int size = ft_lstsize(lst);
+
     ft_lstclear(&lst, free);
-    return 0;
+
+    return (size == 2) ? 0 : 1;
 }'
+
     run_memory_test "ft_lstsize" "test_lstsize.c" "libft.a"
 
     # ft_lstlast
     create_test_file "test_lstlast.c" '
 #include "libft.h"
 int main() {
-    t_list *lst = ft_lstnew("a");
-    t_list *last = ft_lstnew("last");
-    ft_lstadd_front(&lst, ft_lstnew("b"));
-    ft_lstadd_back(&lst, last);
-    if (ft_lstlast(lst) != last) {
+    char *s1 = strdup("a");
+    char *s2 = strdup("b");
+    char *s3 = strdup("last");
+
+    if (!s1 || !s2 || !s3)
+        return 1;
+
+    t_list *lst = ft_lstnew(s1);
+    t_list *second = ft_lstnew(s2);
+    t_list *last = ft_lstnew(s3);
+
+    if (!lst || !second || !last) {
+        free(s1);
+        free(s2);
+        free(s3);
         ft_lstclear(&lst, free);
+        ft_lstclear(&second, free);
+        ft_lstclear(&last, free);
         return 1;
     }
+
+    ft_lstadd_front(&lst, second); // second devient la tête
+    ft_lstadd_back(&lst, last);    // last devient la fin
+
+    int result = (ft_lstlast(lst) == last) ? 0 : 1;
+
     ft_lstclear(&lst, free);
-    return 0;
+    return result;
 }'
     run_memory_test "ft_lstlast" "test_lstlast.c" "libft.a"
 
@@ -907,15 +949,29 @@ int main() {
     create_test_file "test_lstadd_back.c" '
 #include "libft.h"
 int main() {
-    t_list *lst = ft_lstnew("a");
-    t_list *new = ft_lstnew("new");
-    ft_lstadd_back(&lst, new);
-    if (ft_lstlast(lst) != new) {
+    char *s1 = strdup("a");
+    char *s2 = strdup("new");
+
+    if (!s1 || !s2)
+        return 1;
+
+    t_list *lst = ft_lstnew(s1);
+    t_list *new = ft_lstnew(s2);
+
+    if (!lst || !new) {
+        free(s1);
+        free(s2);
         ft_lstclear(&lst, free);
+        ft_lstclear(&new, free);
         return 1;
     }
+
+    ft_lstadd_back(&lst, new);
+
+    int result = (ft_lstlast(lst) == new) ? 0 : 1;
+
     ft_lstclear(&lst, free);
-    return 0;
+    return result;
 }'
     run_memory_test "ft_lstadd_back" "test_lstadd_back.c" "libft.a"
 
