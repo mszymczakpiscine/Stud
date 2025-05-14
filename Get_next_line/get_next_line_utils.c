@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:14:27 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/13 17:08:20 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/14 21:25:23 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	res[j] = '\0';
 	return (res);
 }
+
 char	*ft_strdup(const char *s1)
 {
 	char	*dest;
