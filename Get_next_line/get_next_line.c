@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:28:21 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/13 17:44:16 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:04:04 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ int	read_and_stock(int fd, char **stock)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes < 0)
+		{
+			if (*stock)
+				free(*stock);
+			*stock = NULL;
 			return (-1);
+		}
 		buffer[read_bytes] = '\0';
 		tmp = *stock;
 		*stock = ft_strjoin(*stock, buffer);
+		free(tmp);
 		if (!*stock)
 			return (-1);
-		free(tmp);
-		tmp = NULL;
 		if (read_bytes < BUFFER_SIZE)
 			break ;
 	}
@@ -53,9 +57,11 @@ char	*extract_line(const char *stock)
 	i = 0;
 	if (!stock || !*stock)
 		return (NULL);
-	while(stock[i] && stock[i] != '\n')
+	while (stock[i] && stock[i] != '\n')
 		i++;
-	line = malloc(i + 2);
+	if (stock[i] == '\n')
+		i++;
+	line = malloc(i + 1);
 	if (!line)
 		return (NULL);
 	while (j < i)
@@ -67,14 +73,13 @@ char	*extract_line(const char *stock)
 	return (line);
 }
 
-void	update_stock(char **stock, const char *line)
+void	update_stock(char **stock)
 {
 	char	*new_stock;
 	
-	if (ft_strchr(*stock, '\n'))
-		new_stock = ft_strdup(*stock + ft_strlen(line) + 1);
-	else
-		new_stock = ft_strdup(*stock + ft_strlen(line));
+	new_stock = ft_strchr(*stock, '\n');
+	if (new_stock)
+		new_stock = ft_strdup(new_stock + 1);
 	free(*stock);
 	*stock = new_stock;
 }
@@ -95,6 +100,6 @@ char	*get_next_line(int fd)
 		stock = NULL;
 		return (NULL);
 	}
-	update_stock(&stock, line);
+	update_stock(&stock);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:17:07 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/13 17:53:23 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:14:22 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	main()
 {
 	int	fd;
 	char	*line;
+	int		i = 0;
 
-	fd = open("/home/mszymcza/francinette/tests/get_next_line/gnlTester/files/nl", O_RDONLY);
+	fd = open("get_next_line.c", O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Erreur lors de l'ouverture");
@@ -30,7 +31,7 @@ int	main()
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		printf("%s\n", line);
+		printf("\e[43m%d|\e[0m\e[33m%s\e[0m\n", i++, line);
 		free(line);
 	}
 	close(fd);

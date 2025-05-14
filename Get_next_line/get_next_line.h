@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 14:34:36 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/13 17:29:46 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:56:25 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 500
+# define BUFFER_SIZE 12
 #endif
 
 char	*get_next_line(int fd);
@@ -28,7 +28,7 @@ char	*ft_strdup(const char *s1);
 char	*ft_strndup(const char *s1, size_t n);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *str);
-void	update_stock(char **stock, const char *line);
+void	update_stock(char **stock);
 
 #endif
 
