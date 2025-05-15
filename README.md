@@ -1,6 +1,6 @@
 # Stud
 
-Comment utiliser le script  :
+Comment utiliser le script  : (ne marche pas pour get_next_line)
 
 Sauvegardez le script dans un fichier 42tester_enhanced.sh
 
