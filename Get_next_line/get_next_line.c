@@ -14,9 +14,9 @@
 
 static int	read_and_read(int fd, char **stock)
 {
-	char	buffer[BUFFER_SIZE + 1];
+	static char	buffer[BUFFER_SIZE + 1];
 	int		read_bytes;
-	char	*tmp;
+	char		*tmp;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
 	if (read_bytes < 0)
