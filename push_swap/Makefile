@@ -1,10 +1,10 @@
 # ====================================================#
-#                PUSH_SWAP MAKEFILE					  #
+#              	PUSH_SWAP MAKEFILE					  #
 # ====================================================#
 
 NAME		= push_swap.a
 
-SRCS 		= push_swap.c
+SRCS 		= 
 OBJS 		= $(SRCS:.c=.o)
 
 CC			= gcc
