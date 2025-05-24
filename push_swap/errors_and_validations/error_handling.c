@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:47:30 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:00:29 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,4 @@ void	error_exit(t_stack *stack_a, t_stack *stack_b)
 		free_stack(stack_b);
 	write(2, "Error\n", 6);
 	exit(1);
-} 
+}

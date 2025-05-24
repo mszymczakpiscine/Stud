@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:47:53 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 12:00:33 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,4 @@ int	check_doubles(t_stack *stack)
 		current = current->next;
 	}
 	return (0);
-} 
+}

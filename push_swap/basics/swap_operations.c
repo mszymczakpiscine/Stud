@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:46:01 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:56:50 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,4 @@ void	ss(t_stack *stack_a, t_stack *stack_b)
 	swap(stack_a);
 	swap(stack_b);
 	write(1, "ss\n", 3);
-} 
+}

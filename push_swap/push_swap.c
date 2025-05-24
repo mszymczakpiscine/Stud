@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:34:19 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 13:36:55 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	sort_stack(t_stack *stack_a, t_stack *stack_b)
 	size = get_stack_size(stack_a);
 	if (is_sorted(stack_a))
 		return ;
-	if (size <= 5)
+	if (size <= 6)
 		sort_small_stack(stack_a, stack_b);
 	else
 		sort_big_stack(stack_a, stack_b);
@@ -49,7 +49,9 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	char	*debug;
 
+	debug = getenv("DEBUG");
 	if (argc < 2 || !check_args(argc, argv))
 	{
 		write(2, "Error\n", 6);
@@ -62,7 +64,19 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		error_exit(stack_a, stack_b);
 	}
+	if (debug && *debug == '1')
+	{
+		write(2, "Initial state:\n", 14);
+		print_stack(stack_a, 'a');
+		print_stack(stack_b, 'b');
+	}
 	sort_stack(stack_a, stack_b);
+	if (debug && *debug == '1')
+	{
+		write(2, "Final state:\n", 12);
+		print_stack(stack_a, 'a');
+		print_stack(stack_b, 'b');
+	}
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

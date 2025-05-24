@@ -5,50 +5,131 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:50:00 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/05/24 11:46:49 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/05/24 13:19:19 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static int	get_max_bits(t_stack *stack)
+static void	normalize_stack(t_stack *stack)
 {
-	int	max;
-	int	max_bits;
+	t_node	*i;
+	t_node	*j;
+	int		*normalized;
+	int		size;
+	int		pos;
 
-	max = get_max(stack);
-	max_bits = 0;
-	while ((max >> max_bits) != 0)
-		max_bits++;
-	return (max_bits);
+	size = get_stack_size(stack);
+	normalized = (int *)malloc(sizeof(int) * size);
+	i = stack->top;
+	while (i)
+	{
+		pos = 0;
+		j = stack->top;
+		while (j)
+		{
+			if (j->value < i->value)
+				pos++;
+			j = j->next;
+		}
+		normalized[size - get_stack_size(stack)] = pos;
+		i = i->next;
+	}
+	i = stack->top;
+	pos = 0;
+	while (i)
+	{
+		i->value = normalized[pos++];
+		i = i->next;
+	}
+	free(normalized);
+}
+
+static int	find_best_move(t_stack *stack_a, int value)
+{
+	t_node	*current;
+	int		pos;
+	int		size;
+
+	pos = 0;
+	size = get_stack_size(stack_a);
+	current = stack_a->top;
+	while (current && current->value != value)
+	{
+		pos++;
+		current = current->next;
+	}
+	if (pos > size / 2)
+		return (size - pos);
+	return (pos);
+}
+
+static void	optimize_chunks(t_stack *stack_a, t_stack *stack_b, int chunk_size)
+{
+	int		size;
+	int		chunk;
+	int		i;
+	int		pos;
+	t_node	*current;
+	int		pushed;
+
+	size = get_stack_size(stack_a);
+	chunk = 0;
+	pushed = 0;
+
+	while (pushed < size)
+	{
+		i = 0;
+		while (i < size && pushed < size)
+		{
+			current = stack_a->top;
+			if (current->value >= chunk * chunk_size && 
+				current->value < (chunk + 1) * chunk_size)
+			{
+				pb(stack_a, stack_b);
+				if (stack_b->top->value < chunk * chunk_size + chunk_size / 2)
+					rb(stack_b);
+				pushed++;
+			}
+			else
+				ra(stack_a);
+			i++;
+		}
+		chunk++;
+	}
+
+	// Optimisation du retour des éléments de B vers A
+	while (stack_b->top)
+	{
+		i = get_max(stack_b);
+		current = stack_b->top;
+		pos = find_best_move(stack_b, i);
+		
+		if (pos > 0)
+		{
+			while (pos > 0)
+			{
+				if (pos > get_stack_size(stack_b) / 2)
+					rrb(stack_b);
+				else
+					rb(stack_b);
+				pos = find_best_move(stack_b, i);
+			}
+		}
+		pa(stack_a, stack_b);
+	}
 }
 
 void	sort_big_stack(t_stack *stack_a, t_stack *stack_b)
 {
-	int		i;
-	int		j;
-	int		size;
-	int		max_bits;
-	t_node	*current;
+	int	size;
 
-	max_bits = get_max_bits(stack_a);
+	normalize_stack(stack_a);
 	size = get_stack_size(stack_a);
-	i = 0;
-	while (i < max_bits)
-	{
-		j = 0;
-		while (j < size)
-		{
-			current = stack_a->top;
-			if (((current->value >> i) & 1) == 1)
-				ra(stack_a);
-			else
-				pb(stack_a, stack_b);
-			j++;
-		}
-		while (get_stack_size(stack_b) != 0)
-			pa(stack_a, stack_b);
-		i++;
-	}
-} 
+
+	if (size <= 100)
+		optimize_chunks(stack_a, stack_b, 15);  // Chunks plus petits pour 100 nombres
+	else
+		optimize_chunks(stack_a, stack_b, 30);  // Chunks plus petits pour 500 nombres
+}

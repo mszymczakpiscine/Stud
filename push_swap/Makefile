@@ -6,7 +6,7 @@
 #    By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#              #
-#    Updated: 2025/05/24 11:39:09 by mszymcza         ###   ########.fr        #
+#    Updated: 2025/05/24 13:34:22 by mszymcza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ BASICS_SRCS	= $(BASICS_DIR)swap_operations.c \
 			  $(BASICS_DIR)rotate_operations.c \
 			  $(BASICS_DIR)reverse_rotate_operations.c
 
-UTILS_SRCS	= $(UTILS_DIR)stack_utils.c
+UTILS_SRCS	= $(UTILS_DIR)stack_u.c $(UTILS_DIR)stack_utils.c
 
 ERROR_SRCS	= $(ERROR_DIR)error_handling.c \
 			  $(ERROR_DIR)args_validation.c \
@@ -65,7 +65,6 @@ $(NAME):	$(OBJS)
 
 clean:
 			rm -f $(OBJS)
-			rm -rf $(BASICS_DIR) $(UTILS_DIR) $(ERROR_DIR) $(DEBUG_DIR) $(SORT_DIR)
 
 fclean:		clean
 			rm -f $(NAME)
@@ -82,4 +81,14 @@ test:		$(NAME)
 leak_check:	$(NAME)
 			valgrind --leak-check=full ./$(NAME) 2 1 3 6 5 8
 
-.PHONY:		all clean fclean re test leak_check
+# Règle pour rendre le checker exécutable
+checker:
+	chmod +x checker_linux
+
+# Règle pour tester avec le checker
+test_checker: $(NAME) checker
+	./$(NAME) 2 1 3 6 5 8 | ./checker_linux 2 1 3 6 5 8
+	./$(NAME) 4 67 3 87 23 | ./checker_linux 4 67 3 87 23
+	./$(NAME) 1 2 3 4 5 | ./checker_linux 1 2 3 4 5
+
+.PHONY:		all clean fclean re test leak_check checker test_checker

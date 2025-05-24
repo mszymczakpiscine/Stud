@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:46:30 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:57:49 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,4 @@ void	pb(t_stack *stack_a, t_stack *stack_b)
 {
 	push(stack_a, stack_b);
 	write(1, "pb\n", 3);
-} 
+}

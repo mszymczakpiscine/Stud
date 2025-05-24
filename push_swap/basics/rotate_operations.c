@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 11:46:42 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:58:02 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,4 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 	rotate(stack_a);
 	rotate(stack_b);
 	write(1, "rr\n", 3);
-} 
+}
