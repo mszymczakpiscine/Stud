@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/16 11:48:04 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:34:19 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ static void	fill_stack_a(t_stack *stack_a, int argc, char **argv)
 	}
 }
 
+static void	sort_stack(t_stack *stack_a, t_stack *stack_b)
+{
+	int	size;
+
+	size = get_stack_size(stack_a);
+	if (is_sorted(stack_a))
+		return ;
+	if (size <= 5)
+		sort_small_stack(stack_a, stack_b);
+	else
+		sort_big_stack(stack_a, stack_b);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
@@ -49,6 +62,7 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		error_exit(stack_a, stack_b);
 	}
+	sort_stack(stack_a, stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

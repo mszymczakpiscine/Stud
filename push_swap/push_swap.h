@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/16 11:51:32 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 11:37:32 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,56 @@ typedef struct s_stack
 	int		size;
 }	t_stack;
 
-/* Opérations de base sur les piles */
-void		sa(t_stack *stack_a);           /* Swap les 2 premiers éléments de A */
-void		sb(t_stack *stack_b);           /* Swap les 2 premiers éléments de B */
-void		ss(t_stack *stack_a, t_stack *stack_b);  /* sa et sb en même temps */
-void		pa(t_stack *stack_a, t_stack *stack_b);  /* Push de B vers A */
-void		pb(t_stack *stack_a, t_stack *stack_b);  /* Push de A vers B */
-void		ra(t_stack *stack_a);           /* Rotation vers le haut de A */
-void		rb(t_stack *stack_b);           /* Rotation vers le haut de B */
-void		rr(t_stack *stack_a, t_stack *stack_b);  /* ra et rb en même temps */
-void		rra(t_stack *stack_a);          /* Rotation vers le bas de A */
-void		rrb(t_stack *stack_b);          /* Rotation vers le bas de B */
-void		rrr(t_stack *stack_a, t_stack *stack_b); /* rra et rrb en même temps */
+/* Opérations de base sur les piles (basics/) */
+/* swap_operations.c */
+void		sa(t_stack *stack_a);
+void		sb(t_stack *stack_b);
+void		ss(t_stack *stack_a, t_stack *stack_b);
+/* push_operations.c */
+void		pa(t_stack *stack_a, t_stack *stack_b);
+void		pb(t_stack *stack_a, t_stack *stack_b);
 
-/* Fonctions utilitaires */
-t_stack		*init_stack(void);              /* Initialise une nouvelle pile */
-void		free_stack(t_stack *stack);     /* Libère la mémoire d'une pile */
-int			is_sorted(t_stack *stack);      /* Vérifie si la pile est triée */
-void		add_node(t_stack *stack, int value); /* Ajoute un élément à la pile */
-int			get_min(t_stack *stack);        /* Trouve la valeur minimale */
-int			get_max(t_stack *stack);        /* Trouve la valeur maximale */
-int			get_stack_size(t_stack *stack); /* Retourne la taille de la pile */
+/* rotate_operations.c */
+void		ra(t_stack *stack_a);
+void		rb(t_stack *stack_b);
+void		rr(t_stack *stack_a, t_stack *stack_b);
 
-/* Gestion des erreurs et validation */
+/* reverse_rotate_operations.c */
+void		rra(t_stack *stack_a);
+void		rrb(t_stack *stack_b);
+void		rrr(t_stack *stack_a, t_stack *stack_b);
+
+/* Fonctions utilitaires (utils/) */
+/* stack_utils.c */
+t_stack		*init_stack(void);
+void		free_stack(t_stack *stack);
+int			is_sorted(t_stack *stack);
+void		add_node(t_stack *stack, int value);
+int			get_min(t_stack *stack);
+int			get_max(t_stack *stack);
+int			get_stack_size(t_stack *stack);
+
+/* Gestion des erreurs et validation (errors_and_validations/) */
+/* error_handling.c */
 void		error_exit(t_stack *stack_a, t_stack *stack_b);
-int			check_args(int argc, char **argv);
-int			check_doubles(t_stack *stack);
-long		ft_atoi(const char *str);       /* Version sécurisée de atoi */
 
-/* Fonctions d'affichage pour le debug */
+/* args_validation.c */
+int			check_args(int argc, char **argv);
+long		ft_atoi(const char *str);
+
+/* stack_validation.c */
+int			check_doubles(t_stack *stack);
+
+/* Fonctions d'affichage pour le debug (debug/) */
+/* print_stack.c */
 void		print_stack(t_stack *stack, char stack_name);
+
+/* Algorithmes de tri (sorting/) */
+/* small_sort.c */
+void		sort_small_stack(t_stack *stack_a, t_stack *stack_b);
+
+/* big_sort.c */
+void		sort_big_stack(t_stack *stack_a, t_stack *stack_b);
 
 int			main(int argc, char **argv);
 
