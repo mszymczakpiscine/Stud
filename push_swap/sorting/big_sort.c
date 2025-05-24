@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 13:19:19 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:37:43 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,13 @@ static void	optimize_chunks(t_stack *stack_a, t_stack *stack_b, int chunk_size)
 	int		i;
 	int		pos;
 	t_node	*current;
-	int		pushed;
 
 	size = get_stack_size(stack_a);
 	chunk = 0;
-	pushed = 0;
-
-	while (pushed < size)
+	while (get_stack_size(stack_a) > 0)
 	{
 		i = 0;
-		while (i < size && pushed < size)
+		while (i < size && get_stack_size(stack_a) > 0)
 		{
 			current = stack_a->top;
 			if (current->value >= chunk * chunk_size && 
@@ -90,7 +87,6 @@ static void	optimize_chunks(t_stack *stack_a, t_stack *stack_b, int chunk_size)
 				pb(stack_a, stack_b);
 				if (stack_b->top->value < chunk * chunk_size + chunk_size / 2)
 					rb(stack_b);
-				pushed++;
 			}
 			else
 				ra(stack_a);
@@ -99,16 +95,14 @@ static void	optimize_chunks(t_stack *stack_a, t_stack *stack_b, int chunk_size)
 		chunk++;
 	}
 
-	// Optimisation du retour des éléments de B vers A
 	while (stack_b->top)
 	{
 		i = get_max(stack_b);
-		current = stack_b->top;
 		pos = find_best_move(stack_b, i);
 		
-		if (pos > 0)
+		while (pos != 0)
 		{
-			while (pos > 0)
+			if (pos > 0)
 			{
 				if (pos > get_stack_size(stack_b) / 2)
 					rrb(stack_b);
@@ -125,11 +119,12 @@ void	sort_big_stack(t_stack *stack_a, t_stack *stack_b)
 {
 	int	size;
 
+	if (is_sorted(stack_a))
+		return ;
 	normalize_stack(stack_a);
 	size = get_stack_size(stack_a);
-
 	if (size <= 100)
-		optimize_chunks(stack_a, stack_b, 15);  // Chunks plus petits pour 100 nombres
+		optimize_chunks(stack_a, stack_b, 15);
 	else
-		optimize_chunks(stack_a, stack_b, 30);  // Chunks plus petits pour 500 nombres
+		optimize_chunks(stack_a, stack_b, 30);
 }

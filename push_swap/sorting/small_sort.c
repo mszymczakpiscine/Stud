@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 11:46:49 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/24 13:43:20 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:36:17 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,33 +52,38 @@ static void	sort_three(t_stack *stack_a)
 	}
 }
 
+static void	push_min_to_b(t_stack *a, t_stack *b)
+{
+	int	min;
+	int	pos;
+	int	size;
+
+	min = get_min(a);
+	pos = 0;
+	size = get_stack_size(a);
+	while (a->top->value != min && pos < size)
+	{
+		if (a->top->next && a->top->next->value == min)
+			sa(a);
+		else if (pos >= size / 2)
+			rra(a);
+		else
+			ra(a);
+		pos++;
+	}
+	pb(a, b);
+}
+
 static void	sort_four_to_six(t_stack *stack_a, t_stack *stack_b)
 {
-	int	size;
-	int	i;
-
-	size = get_stack_size(stack_a);
-	i = 0;
-	// Trouve et pousse les plus petits éléments dans l'ordre
-	while (i < size - 3)
+	if (is_sorted(stack_a))
+		return ;
+	while (get_stack_size(stack_a) > 3 && !is_sorted(stack_a))
 	{
-		int	min = get_min(stack_a);
-		while (stack_a->top->value != min)
-		{
-			if (stack_a->top->next && stack_a->top->next->value == min)
-				sa(stack_a);
-			else
-				ra(stack_a);
-		}
-		pb(stack_a, stack_b);
-		i++;
+		push_min_to_b(stack_a, stack_b);
 	}
-
-	// Trie les 3 éléments restants
 	if (!is_sorted(stack_a))
 		sort_three(stack_a);
-
-	// Ramène les éléments dans l'ordre
 	while (stack_b->top)
 		pa(stack_a, stack_b);
 }
@@ -89,7 +94,7 @@ void	sort_small_stack(t_stack *stack_a, t_stack *stack_b)
 
 	size = get_stack_size(stack_a);
 	if (is_sorted(stack_a))
-		return;
+		return ;
 	if (size == 2)
 		sort_two(stack_a);
 	else if (size == 3)
