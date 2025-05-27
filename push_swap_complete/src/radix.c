@@ -6,11 +6,27 @@ static int compare_ints(const void *a, const void *b) {
     return (*(int *)a - *(int *)b);
 }
 
+static void    bubble_sort(int *array, int size) {
+    int i = 0;
+    while (i < size - 1) {
+        int j = 0;
+        while (j < size - i - 1) {
+            if (array[j] > array[j + 1]) {
+                int tmp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = tmp;
+            }
+            j++;
+        }
+        i++;
+    }
+}
+
 void assign_index(t_stack *a) {
     int size = stack_size(a);
     int *array = stack_to_array(a);
 
-    qsort(array, size, sizeof(int), compare_ints);
+    bubble_sort(array, size); // tri maison
 
     t_node *node = a->top;
     while (node) {
