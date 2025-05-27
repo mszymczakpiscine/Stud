@@ -18,12 +18,19 @@ void add_node(t_stack *stack, t_node *node) {
 
 t_stack *init_stack(int argc, char **argv) {
     t_stack *stack = malloc(sizeof(t_stack));
+    if (!stack)
+        return NULL;
+
     stack->top = NULL;
-    for (int i = argc - 1; i > 0; i--) {
+
+    int i = argc - 1;
+    while (i > 0) {
         int val = atoi(argv[i]);
         t_node *node = new_node(val);
         add_node(stack, node);
+        i--;
     }
+
     return stack;
 }
 
