@@ -1,6 +1,6 @@
 NAME	=	libft.a
 
-FLAG	=	-Wall -Wextra -Werror
+FLAG	=	-Wall -Wextra -Werror -march=native
 
 FILES	=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
 			ft_memchr.c ft_memcmp.c ft_strlen.c ft_strlcpy.c ft_strlcat.c \
