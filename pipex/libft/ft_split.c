@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:41:53 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/29 19:06:37 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/06/09 09:58:57 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	next_charset(char const *s, char c)
 	return (len);
 }
 
-void	free_tab(char **result, int i)
+void	free_split(char **result, int i)
 {
 	while (i)
 	{
@@ -74,7 +74,7 @@ char	**ft_split(char const *s, char c)
 			len = next_charset(s, c);
 			result[i] = ft_substr(s, 0, len);
 			if (!result[i])
-				return (free_tab(result, i), NULL);
+				return (free_split(result, i), NULL);
 			i++;
 			s += len;
 		}
