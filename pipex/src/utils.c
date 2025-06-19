@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 15:19:57 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/06/09 11:04:13 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:13:17 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	execute(char *cmd, char **envp)
 	if (!path)
 	{
 		free_tab(args);
-		ft_putstr_fd("\033[1;31mError : command not found\n\033[0m", 2);
+		ft_putstr_fd("Error : command not found\n", 2);
 		exit(EXIT_FAILURE);
 	}
 	if (execve(path, args, envp) == -1)

@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:36:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/06/18 19:42:07 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:14:13 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@
 
 void	error(void);
 void	free_tab(char **tab);
-//char	*find_path(char *cmd, char **envp);
+char	*find_path(char *cmd, char **envp);
 void	execute(char *cmd, char **envp);
 void	child(char **argv, char **envp, int *fd);
 void	parent(char **argv, char **envp, int *fd);
-//int		get_line(char **line);
+int		get_line(char **line);
 
 #endif
 

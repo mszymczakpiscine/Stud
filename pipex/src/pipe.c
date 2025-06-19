@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:34:39 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/06/09 10:37:03 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:12:49 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else
 	{
-		ft_putstr_fd("\033[1;31mError : not the good arguments\n\033[0m", 2);
-		ft_putstr_fd("Try : ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+		ft_putstr_fd("There is an Error\n", 2);
 	}
 	return (0);
 }
