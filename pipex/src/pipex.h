@@ -6,14 +6,14 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:36:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/06/19 15:14:13 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/06/21 09:52:02 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -31,6 +31,3 @@ void	parent(char **argv, char **envp, int *fd);
 int		get_line(char **line);
 
 #endif
-
-//./pipex infile "cat src/pipe.c"  "grep ' '" outfile
-//gestion des single quotes

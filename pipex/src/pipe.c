@@ -6,11 +6,32 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:34:39 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/06/19 15:12:49 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/06/21 09:54:15 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	error(void)
+{
+	perror("\033[1;31mError\n\033[0m");
+	exit(EXIT_FAILURE);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+}
 
 void	child(char **argv, char **envp, int *fd)
 {
