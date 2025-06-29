@@ -6,16 +6,24 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:22:42 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/28 11:38:20 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:28:29 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <stdint.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <stdint.h>
+#include <stdarg.h>
+#include <limits.h>
+#include <stdio.h>
+#include <stddef.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_list
 {
@@ -72,5 +80,16 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+//static int			ft_pointer(void *ptr);
+//static int			ft_format(va_list args, char c);
+int					ft_printf(const char *format, ...);
+int					ft_puthex(unsigned int n, char format);
+int					ft_putchar(char c);
+int					ft_putnbr_unsigned(unsigned int n);
+int					ft_putnbr(int n);
+int					ft_putptr(uintptr_t n);
+int					ft_putstr(char *s);
+char				*get_next_line(int fd);
 
 #endif

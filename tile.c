@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   tile.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 13:41:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/30 09:07:35 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/06/18 13:54:13 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/06/18 13:54:13 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../so_long.h"
 
-size_t	ft_strlen(const char *str)
+t_tile	char_to_tile(char c)
 {
-	size_t	len;
-
-	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-		len++;
-	return (len);
+	if (c == '0')
+		return (TILE_EMPTY);
+	if (c == '1')
+		return (TILE_WALL);
+	if (c == 'C')
+		return (TILE_ITEM);
+	if (c == 'E')
+		return (TILE_EXIT);
+	if (c == 'P')
+		return (TILE_START);
+	return (TILE_INVALID);
 }

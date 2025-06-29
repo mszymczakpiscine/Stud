@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putptr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 13:41:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/30 09:07:35 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/04/28 19:21:08 by codespace         #+#    #+#             */
+/*   Updated: 2025/05/07 13:34:50 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	len;
+int	ft_putchar(char c);
 
+int	ft_putptr(uintptr_t n)
+{
+	char			*base;
+	int				len;
+
+	base = "0123456789abcdef";
 	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-		len++;
+	if (n >= 16)
+		len += ft_putptr(n / 16);
+	len += ft_putchar(base[n % 16]);
 	return (len);
 }

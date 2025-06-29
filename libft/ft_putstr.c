@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 13:41:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/30 09:07:35 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/04/28 19:44:09 by codespace         #+#    #+#             */
+/*   Updated: 2025/05/07 13:39:23 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+//#include <unistd.h>
 
-size_t	ft_strlen(const char *str)
+int	ft_putstr(char *s)
 {
-	size_t	len;
+	int	i;
 
-	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-		len++;
-	return (len);
+	i = 0;
+	if (!s)
+		return (write(1, "(null)", 6));
+	while (s[i])
+		i++;
+	write(1, s, i);
+	return (i);
 }

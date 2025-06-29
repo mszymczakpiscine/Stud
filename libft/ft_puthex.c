@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 13:41:41 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/04/30 09:07:35 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/04/28 19:20:37 by codespace         #+#    #+#             */
+/*   Updated: 2025/05/07 13:33:23 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+//#include <stdio.h>
 
-size_t	ft_strlen(const char *str)
+int	ft_putchar(char c);
+
+int	ft_puthex(unsigned int n, char format)
 {
-	size_t	len;
+	char	*base;
+	int		len;
 
 	len = 0;
-	if (!str)
-		return (0);
-	while (str[len])
-		len++;
+	if (format)
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	if (n >= 16)
+		len += ft_puthex(n / 16, format);
+	len += ft_putchar(base[n % 16]);
 	return (len);
 }
