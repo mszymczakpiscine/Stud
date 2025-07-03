@@ -1,37 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_str.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/03 11:05:42 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/07/03 11:11:35 by mszymcza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void ft_putchar(char c)
+int	main(int argc, char **argv)
 {
-    write(1, &c, 1);
-}
-
-int is_space(char c)
-{
-    if (c <= 32)
-        return 1;
-    return 0;
-}
-
-int main(int ac, char **av)
-{
-    if (ac == 2)
-    {
-        int i = 0, space = 0;
-        while (is_space(av[1][i]))
-            i++;
-        while (av[1][i])
-        {
-            if (is_space(av[1][i]))
-                 space = 1;
-            if (!is_space(av[1][i]))
-            {
-                if (space)
-                    write(1, "   ", 3);
-                space = 0;
-                ft_putchar(av[1][i]);
-            }
-            i++;
-        }
-    }
-    ft_putchar('\n');
+	int i = 0;
+	int word = 0;
+	int first = 1;
+	if (argc == 2)
+	{
+		while (argv[1][i])
+		{
+			if (argv[1][i] == ' ' || argv[1][i] == '\t')
+				word = 0;
+			else
+			{
+				if (word == 0 && !first)
+					write(1, "   ", 3);
+				write(1, &argv[1][i], 1);
+				word = 1;
+				first = 0;
+			}
+			i++;
+		}
+	}
+	write(1, "\n", 1);
 }
