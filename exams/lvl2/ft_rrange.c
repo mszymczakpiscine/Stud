@@ -1,16 +1,39 @@
-int *ft_rrange(int start, int end)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_rrange.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/03 11:33:28 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/07/03 11:38:57 by mszymcza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+
+int	*ft_rrange(int start, int end)
 {
-    int i = 0;
-    int len = (end - start) < 0 ? ((end - start) * -1) + 1 : (end - start) + 1;
-    int *range = (int *) malloc(len * sizeof(int));
-    
-    while (i < len)
-    {
-        if (end < start)
-            range[i] = end++;
-        else
-            range[i] = end--;
-        i++;
-    }
-    return (range);
+	int i = 0;
+	int size;
+	int *range;
+	if (start <= end)
+		size = end - start + 1;
+	else
+		size = start - end + 1;
+	range = malloc(sizeof(int) * size);
+	if (!range)
+		return NULL;
+	if (start <= end)
+	{
+		while (end >= start)
+			range[++i} = end--;
+	}
+	else 
+	{
+		while (end <= start)
+			range[++i] = end++;
+	}
+	return range;
 }
+
