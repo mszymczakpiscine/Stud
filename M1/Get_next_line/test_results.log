@@ -1,0 +1,9 @@
+
+[=== TESTING GET_NEXT_LINE ===]
+
+[=== Checking gnl required files ===]
+Checking Makefile                                           ✗ FAIL
+Checking get_next_line.h                                    ✓ OK
+Checking get_next_line.c                                    ✓ OK
+Checking get_next_line_utils.c                              ✓ OK
+[1;33m1 files missing[0m
