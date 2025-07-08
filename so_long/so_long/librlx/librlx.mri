@@ -1,4 +1,0 @@
-CREATE librlx.a
-ADDLIB minilibx-linux/libmlx.a
-SAVE
-END
