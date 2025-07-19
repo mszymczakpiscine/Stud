@@ -1,5 +1,0 @@
-da : castle vanaia 
-perso fluide qui bouge comme il veut sans se prendre des murs genre isaac et non pokemon jaune
-
-animations bonus + mob + vie qui creve + count in game
-
