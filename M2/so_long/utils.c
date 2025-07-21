@@ -6,11 +6,53 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:31:52 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/19 11:41:48 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:40:16 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	handle_item(t_game *game, int new_x, int new_y)
+{
+	game->collected++;
+	game->map[new_y * game->width + new_x] = TILE_EMPTY;
+}
+
+static int	handle_exit(t_game *game)
+{
+	if (game->collected == game->collectibles)
+	{
+		write(1, "You win!\n", 9);
+		//mlx_destroy_window(game->mlx, game->window.ptr);
+		mlx_loop_end(game->mlx);
+		//free_map(game->map);
+		//exit(0);
+	}
+	return (0);
+}
+
+static void	update_player_pos(t_game *game, int new_x, int new_y)
+{
+	game->player_x = new_x;
+	game->player_y = new_y;
+	ft_printf("Steps: %d\n", game->steps);
+}
+
+static void	process_move(t_game *game, int new_x, int new_y)
+{
+	if (game->map[new_y * game->width + new_x] != TILE_WALL)
+	{
+		game->steps++;
+		if (game->map[new_y * game->width + new_x] == TILE_ITEM)
+			handle_item(game, new_x, new_y);
+		if (game->map[new_y * game->width + new_x] == TILE_EXIT)
+		{
+			handle_exit(game);
+			return ;
+		}
+		update_player_pos(game, new_x, new_y);
+	}
+}
 
 int	handle_input(int keycode, t_game *game)
 {
@@ -19,12 +61,25 @@ int	handle_input(int keycode, t_game *game)
 
 	new_x = game->player_x;
 	new_y = game->player_y;
-
 	if (keycode == KEY_ESC)
 	{
-		mlx_destroy_window(game->mlx, game->window.ptr);
-		free_map(game->map);
-		exit(0);
+		mlx_loop_end(game->mlx);
+		//free(game->mlx);
+		//mlx_destroy_image(game->mlx ,game->player.data);
+		//mlx_destroy_image(game->mlx ,game->wall.data);
+		//mlx_destroy_image(game->mlx ,game->floor.data);
+		//mlx_destroy_image(game->mlx ,game->collect.data);
+		//mlx_destroy_image(game->mlx ,game->exit.data);
+		//mlx_destroy_image(game->mlx ,game->enemy.data);
+		
+		//mlx_clear_window(game->mlx, game->window.ptr);
+		//mlx_destroy_window(game->mlx, game->window.ptr);
+		////mlx_destroy_display
+		////mlx_destroy_display(game->window.ptr);
+		//free(game->mlx);
+		//free(game->window.ptr);
+		//free_map(game->map);
+		//exit(0);
 	}
 	if (keycode == KEY_UP)
 		new_y--;
@@ -36,62 +91,22 @@ int	handle_input(int keycode, t_game *game)
 		new_x++;
 	else
 		return (0);
-	if (game->map[new_y * game->width + new_x] != TILE_WALL)
-	{
-		game->steps++;
-		if (game->map[new_y * game->width + new_x] == TILE_ITEM)
-		{
-			game->collected++;
-			game->map[new_y * game->width + new_x] = TILE_EMPTY;
-		}
-		if (game->map[new_y * game->width + new_x] == TILE_EXIT)
-		{
-			if (game->collected == game->collectibles)
-			{
-				write(1, "You win!\n", 9);
-				mlx_destroy_window(game->mlx, game->window.ptr);
-				free_map(game->map);
-				exit(0);
-			}
-			return (0);
-		}
-
-		game->player_x = new_x;
-		game->player_y = new_y;
-		printf("Steps: %d\n", game->steps);
-	}
+	process_move(game, new_x, new_y);
 	return (0);
 }
 
-int	render_frame(t_game *game)
+void	put_steps_to_screen(t_game *game)
 {
-	int	x;
-	int	y;
-	int	pos;
+	char	*steps_str;
+	char	*display;
 
-	y = 0;
-	while (y < game->height)
-	{
-		x = 0;
-		while (x < game->width)
-		{
-			pos = y * game->width + x;
-			mlx_put_image_to_window(game->mlx, game->window.ptr,
-				game->floor.data, x * TILE_SIZE, y * TILE_SIZE);
-			if (game->map[pos] == TILE_WALL)
-				mlx_put_image_to_window(game->mlx, game->window.ptr,
-					game->wall.data, x * TILE_SIZE, y * TILE_SIZE);
-			else if (game->map[pos] == TILE_ITEM)
-				mlx_put_image_to_window(game->mlx, game->window.ptr,
-					game->collect.data, x * TILE_SIZE, y * TILE_SIZE);
-			else if (game->map[pos] == TILE_EXIT)
-				mlx_put_image_to_window(game->mlx, game->window.ptr,
-					game->exit.data, x * TILE_SIZE, y * TILE_SIZE);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(game->mlx, game->window.ptr,
-		game->player.data, game->player_x * TILE_SIZE, game->player_y * TILE_SIZE);
-	return (0);
+	steps_str = ft_itoa(game->steps);
+	if (!steps_str)
+		return ;
+	display = ft_strjoin("Steps: ", steps_str);
+	free(steps_str);
+	if (!display)
+		return ;
+	mlx_string_put(game->mlx, game->window.ptr, 10, 20, 0xFFFFFF, display);
+	free(display);
 }

@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:27:35 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/19 11:41:40 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:07:14 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,40 @@ void	free_map(t_tile *map)
 
 t_tile	*read_map(char *file_in, int width, int height, t_game *game)
 {
-	int		fd;
-	char	c;
-	t_tile	*map;
-	int		i = 0;
-	int		val_return;
+    int		fd;
+    char	c;
+    t_tile	*map;
+    int		i = 0;
+    int		val_return;
 
-	height = count_line(file_in);
-	width = col_count(file_in);
-	if (height <= 0 || width <= 0)
-		return (NULL);
-	map = malloc(sizeof(t_tile) * (width * height));
-	if (!map)
-		return (NULL);
-	fd = open(file_in, O_RDONLY);
-	if (fd < 0)
-		return (free(map), NULL);
-	while (i < (width * height) && (val_return = read(fd, &c, 1)) > 0)
-	{
-		if (c == '\n')
-			continue;
-		map[i] = char_to_tile(c);
-		if (map[i] == TILE_START)
-		{
-			game->player_x = i % width;
-			game->player_y = i / width;
-		}
-		if (map[i++] == TILE_INVALID)
-			return (close(fd), free(map), NULL);
-	}
-	close(fd);
-	return (map);
+    if (height <= 0 || width <= 0)
+        return (NULL);
+    map = malloc(sizeof(t_tile) * (width * height));
+    if (!map)
+        return (NULL);
+    fd = open(file_in, O_RDONLY);
+    if (fd < 0)
+        return (free(map), NULL);
+    while ((val_return = read(fd, &c, 1)) > 0)
+    {
+        if (c == '\n')
+            continue;
+        if (i >= width * height)
+            break;
+        map[i] = char_to_tile(c);
+        if (map[i] == TILE_START)
+        {
+            game->player_x = i % width;
+            game->player_y = i / width;
+        }
+        if (map[i] == TILE_INVALID)
+            return (close(fd), free(map), NULL);
+        i++;
+    }
+    close(fd);
+    if (i != width * height)
+        return (free(map), NULL);
+    return (map);
 }
 
 int	validate_map(t_tile *map, int width, int height)

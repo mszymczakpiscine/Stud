@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:22:31 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/19 11:41:21 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/21 12:23:52 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 static void	update_player_position(t_game *game, int new_x, int new_y)
 {
-	int index = new_y * game->width + new_x;
+	int	index;
 
+	index = new_y * game->width + new_x;
 	if (game->map[index] == TILE_WALL)
-		return;
+		return ;
 	if (game->map[index] == TILE_ITEM)
 	{
 		game->collected++;
@@ -31,19 +32,22 @@ static void	update_player_position(t_game *game, int new_x, int new_y)
 			exit(0);
 		}
 		else
-			return;
+			return ;
 	}
 	game->player_x = new_x;
 	game->player_y = new_y;
 	game->steps++;
+	game->needs_redraw = 1;
 	ft_printf("Steps: %d\n", game->steps);
 }
 
 void	move_player(t_game *game, int keycode)
 {
-	int	new_x = game->player_x;
-	int	new_y = game->player_y;
+	int	new_x;
+	int	new_y;
 
+	new_x = game->player_x;
+	new_y = game->player_y;
 	if (keycode == KEY_UP)
 		new_y--;
 	else if (keycode == KEY_DOWN)
@@ -57,6 +61,6 @@ void	move_player(t_game *game, int keycode)
 		ft_printf("Game exited.\n");
 		exit(0);
 	}
-
 	update_player_position(game, new_x, new_y);
+	game->needs_redraw = 1;
 }
