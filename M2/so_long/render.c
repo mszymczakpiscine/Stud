@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:22:25 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/21 15:25:37 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:28:07 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	put_tile(t_game *game, t_img img, int x, int y)
 	mlx_put_image_to_window(game->mlx, game->window.ptr, \
 		 img.data, x * TILE_SIZE, y * TILE_SIZE);
 }
-
 
 static void	render_tiles(t_game *game)
 {
@@ -98,11 +97,8 @@ void	move_enemy(t_game *game)
 
 int	render_frame(t_game *game)
 {
-    //static int	frame_count = 0;
 	game->needs_redraw = 1;
-
     game->fps++;
-	//printf("raw frames = %d\n", game->fps);
 	if (game->enemy_x == game->player_x && game->enemy_y == game->player_y)
     {
 		write(1, "You died!\n", 10);
@@ -116,11 +112,8 @@ int	render_frame(t_game *game)
 	}
 	if (game->fps % 50000 == 0)
 	{
-		//printf("Rendered %d frames\n", game->fps);
 		move_enemy_towards_player(game);
-		//game->fps = 0;
 		game->needs_redraw = 1;
 	}
-	//usleep(160000);
 	return (0);
 }

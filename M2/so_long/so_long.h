@@ -25,6 +25,8 @@
 # define KEY_LEFT 97
 # define KEY_RIGHT 100
 # define KEY_ESC 65307
+# define MAX_MAP_WIDTH 40
+# define MAX_MAP_HEIGHT 21
 
 typedef enum e_tile 
 {
@@ -42,6 +44,16 @@ typedef struct s_img
 {
 	void	*data;
 }	t_img;
+
+typedef struct s_check
+{
+	char	**map;
+	int		x;
+	int		y;
+	int		width;
+	int		height;
+
+}	t_check;
 
 typedef struct s_window
 {
@@ -86,8 +98,13 @@ void	move_enemy_towards_player(t_game *game);
 void	render_map(t_game *game);
 void	free_map(t_tile *map);
 void	put_steps_to_screen(t_game *game);
+int		check_after_filled(char **map);
+int		flood_fill(t_check *map, int x, int y);
+int		copy_map_check(t_game *game, t_check *map, char *map_file);
 int		render_frame(t_game *game);
 int		close_game(t_game *game);
+int     start_game(t_game *game, char *map_file);
+int 	has_ber_extension(const char *filename);
 int		validate_map(t_tile *map, int width, int height);
 t_tile	*read_map(char *file_in, int width, int height, t_game *game);
 void	print_map(t_tile *map, int width, int height);
@@ -99,6 +116,7 @@ int		col_count(char *file);
 
 /* input.c */
 int		handle_input(int keycode, t_game *game);
+void 	free_check_map(t_check *map);
 
 /* render.c */
 int		render_frame(t_game *game);

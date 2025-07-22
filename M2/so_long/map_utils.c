@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:28:01 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/21 15:27:48 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:49:49 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,13 @@ void init_enemy_position(t_game *game)
             return;
         }
     }
-    game->enemy_x = 0;
-    game->enemy_y = 0;
+    game->enemy_x = -1;
+    game->enemy_y = -1;
     printf("Enemy not found in map, default position used\n");
 }
 
-static int ft_abs(int nb){
+static int ft_abs(int nb)
+{
 	if(nb < 0)
 		return (-nb);
 	return (nb);
@@ -181,7 +182,6 @@ void	move_enemy_towards_player(t_game *game)
 			next_x += 1;
 		else if (dx < 0)
 			next_x -= 1;
-		//usleep(160000);
 	}
 	else
 	{
@@ -189,9 +189,7 @@ void	move_enemy_towards_player(t_game *game)
 			next_y += 1;
 		else if (dy < 0)
 			next_y -= 1;
-		//usleep(160000);
 	}
-
 	if (next_x >= 0 && next_x < game->width &&
 		next_y >= 0 && next_y < game->height &&
 		game->map[next_y * game->width + next_x] != TILE_WALL)
@@ -199,6 +197,85 @@ void	move_enemy_towards_player(t_game *game)
 		game->enemy_x = next_x;
 		game->enemy_y = next_y;
 		game->needs_redraw = 1;
-		//usleep(160000);
 	}
 }
+int copy_map_check(t_game *game, t_check *map, char *map_file)
+{
+    char *line;
+    int fd;
+    int i = 0;
+
+	map->width = game->width;
+	map->height = game->height;
+    fd = open(map_file, O_RDONLY);
+    if (fd < 0)
+        return (0);
+    map->map = ft_calloc(game->height + 1, sizeof(char *));
+    if (!map->map)
+        return (0);
+
+    line = get_next_line(fd);
+    while (line)
+    {
+        map->map[i] = line;
+        i++;
+        line = get_next_line(fd);
+    }
+    map->map[i] = NULL;
+
+    close(fd);
+    return (1);
+}
+
+
+int	flood_fill(t_check *map, int x, int y)
+{
+	if (x < 0 || x >= map->width || y < 0 || y >= map->height)
+		return (1);
+	if (map->map[y][x] == '1' || map->map[y][x] == 'c')
+		return (1);
+	else
+		map->map[y][x] = 'c';
+	flood_fill(map, x + 1, y);
+	flood_fill(map, x - 1, y);
+	flood_fill(map, x, y + 1);
+	flood_fill(map, x, y - 1);
+	return (0);
+}
+
+void free_check_map(t_check *map)
+{
+    int i = 0;
+    if (!map)
+        return;
+    while (map->map && map->map[i])
+    {
+        free(map->map[i]);
+        i++;
+    }
+    free(map->map);
+    free(map);
+}
+
+int check_after_filled(char **map)
+{
+    int i = 0;
+    int j;
+
+    while (map[i])
+    {
+        j = 0;
+        while (map[i][j])
+        {
+            if (map[i][j] == 'C' || map[i][j] == 'E')
+            {
+                write(2, "Error:\nMap can't be finished\n", 29);
+                return (1);
+            }
+            j++;
+        }
+        i++;
+    }
+    return (0);
+}
+

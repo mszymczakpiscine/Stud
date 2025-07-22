@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 11:40:21 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/21 15:45:07 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:34:04 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 int	close_game(t_game *game)
 {
 	mlx_loop_end(game->mlx);
-	//mlx_destroy_window(game->mlx, game->window.ptr);
-	//free_map(game->map);
-	//exit(0);
 	return (0);
 }
-void end_game(t_game *game){
+void end_game(t_game *game)
+{
 	mlx_loop_end(game->mlx);
-	//free(game->mlx);
 	if(game->player.data)
 		mlx_destroy_image(game->mlx, game->player.data);
 	if(game->wall.data)
@@ -37,7 +34,6 @@ void end_game(t_game *game){
 		mlx_destroy_image(game->mlx, game->enemy.data);
 	free_map(game->map);
 	mlx_clear_window(game->mlx, game->window.ptr);
-	//free(game->window.ptr);
 	mlx_destroy_window(game->mlx, game->window.ptr);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
@@ -67,9 +63,7 @@ static void	check_images(t_game *game)
 			mlx_destroy_image(game->mlx, game->exit.data);
 		if(game->enemy.data)
 			mlx_destroy_image(game->mlx, game->enemy.data);
-		//exit(1);
 		end_game(game);
-		//close_game(game);
 	}
 }
 
@@ -168,31 +162,56 @@ static int	init_window_and_images(t_game *game)
     return (0);
 }
 
-static int	start_game(t_game *game, char *map_file)
+int start_game(t_game *game, char *map_file)
 {
-	if (init_game(game, map_file))
-		return (1);
+    t_check *map = ft_calloc(1, sizeof(t_check));
+    if (!map)
+        return (1);
+    if (init_game(game, map_file))
+    {
+        free(map);
+        return (1);
+    }
+    if (init_window_and_images(game))
+    {
+        free(map);
+        return (1);
+    }
+    init_enemy_position(game);
+    game->enemy_dir = 0;
+    if (!validate_map(game->map, game->width, game->height))
+    {
+        free_map(game->map);
+        write(2, "Error\nInvalid map.\n", 20);
+        if (game->mlx)
+        {
+            mlx_destroy_display(game->mlx);
+            free(game->mlx);
+        }
+        free(map);
+        return (1);
+    }
+    if (!copy_map_check(game, map, map_file))
+    {
+        free(map);
+        return (1);
+    }
+    flood_fill(map, game->player_x, game->player_y);
+    if (check_after_filled(map->map))
+    {
 
-	if (init_window_and_images(game))
-		return (1);
-
-	init_enemy_position(game);
-	game->enemy_dir = 0;
-
-	if (!validate_map(game->map, game->width, game->height))
-	{
-		free_map(game->map);
-		write(2, "Error\nInvalid map.\n", 20);
-		if (game->mlx)
-		{
-			mlx_destroy_display(game->mlx);
-			free(game->mlx);
-		}
-		return (1);
-	}
-	return (0);
+        free_check_map(map);
+        free_map(game->map);
+        if (game->mlx)
+        {
+            mlx_destroy_display(game->mlx);
+            free(game->mlx);
+        }
+        return (1);
+    }
+    free_check_map(map);
+    return (0);
 }
-
 
 int	main(int argc, char **argv)
 {
@@ -205,6 +224,11 @@ int	main(int argc, char **argv)
         write(2, "Usage: ./so_long <map_file.ber>\n", 33);
         return (1);
     }
+	if (!has_ber_extension(argv[1]))
+	{
+		write(2, "Error : map file must be a .ber\n", 31);
+		return (1);
+	}
     game.mlx = mlx_init();
     if (!game.mlx)
         return (1);
@@ -214,10 +238,6 @@ int	main(int argc, char **argv)
     mlx_hook(game.window.ptr, 17, 0, (int (*)(void *))close_game, &game);
     mlx_loop_hook(game.mlx, render_frame, &game);
     mlx_loop(game.mlx);
-	//mlx_loop_end(game.mlx);
-    //free(game.mlx);
 	end_game(&game);
-	//free(game.mlx);
-	//free(game.window.ptr);
     return (0);
 }

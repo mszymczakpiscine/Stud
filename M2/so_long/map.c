@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:27:35 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/21 12:07:14 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:25:54 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,16 @@ t_tile	*read_map(char *file_in, int width, int height, t_game *game)
     return (map);
 }
 
+int has_ber_extension(const char *filename)
+{
+    size_t len;
+
+    len = strlen(filename);
+    if (len < 5)
+        return (0);
+    return (strcmp(filename + len - 4, ".ber") == 0);
+}
+
 int	validate_map(t_tile *map, int width, int height)
 {
 	int	player = 0;
@@ -64,6 +74,11 @@ int	validate_map(t_tile *map, int width, int height)
 	int	y, x;
 	t_tile	tile;
 
+    if (width > MAX_MAP_WIDTH || height > MAX_MAP_HEIGHT)
+    {
+        write(2, "Error: map must not exceed 40 columns and 21 rows.\n", 52);
+        return (0);
+    }
 	y = 0;
 	while (y < height)
 	{
@@ -86,3 +101,4 @@ int	validate_map(t_tile *map, int width, int height)
 	}
 	return (player == 1 && exit >= 1 && collectibles >= 1);
 }
+

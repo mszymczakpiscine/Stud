@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:31:52 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/07/21 14:40:16 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:36:04 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static int	handle_exit(t_game *game)
 	if (game->collected == game->collectibles)
 	{
 		write(1, "You win!\n", 9);
-		//mlx_destroy_window(game->mlx, game->window.ptr);
 		mlx_loop_end(game->mlx);
-		//free_map(game->map);
-		//exit(0);
 	}
 	return (0);
 }
@@ -64,22 +61,6 @@ int	handle_input(int keycode, t_game *game)
 	if (keycode == KEY_ESC)
 	{
 		mlx_loop_end(game->mlx);
-		//free(game->mlx);
-		//mlx_destroy_image(game->mlx ,game->player.data);
-		//mlx_destroy_image(game->mlx ,game->wall.data);
-		//mlx_destroy_image(game->mlx ,game->floor.data);
-		//mlx_destroy_image(game->mlx ,game->collect.data);
-		//mlx_destroy_image(game->mlx ,game->exit.data);
-		//mlx_destroy_image(game->mlx ,game->enemy.data);
-		
-		//mlx_clear_window(game->mlx, game->window.ptr);
-		//mlx_destroy_window(game->mlx, game->window.ptr);
-		////mlx_destroy_display
-		////mlx_destroy_display(game->window.ptr);
-		//free(game->mlx);
-		//free(game->window.ptr);
-		//free_map(game->map);
-		//exit(0);
 	}
 	if (keycode == KEY_UP)
 		new_y--;
