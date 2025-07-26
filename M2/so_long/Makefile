@@ -6,15 +6,19 @@
 #    By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 11:46:15 by mszymcza          #+#    #+#              #
-#    Updated: 2025/07/19 11:41:34 by mszymcza         ###   ########.fr        #
+#    Updated: 2025/07/26 12:03:47 by mszymcza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
 
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror -g3
 
-FILES	=	map.c map_utils.c main.c input.c render.c game.c utils.c
+FILES	=	src/map.c src/map_utils.c src/main.c src/input.c \
+			src/render.c src/game.c src/utils.c src/init.c \
+			src/start.c src/floodfill.c src/count.c src/enemy.c \
+			src/enemy_postion.c src/valid_map.c src/count_bis.c \
+			src/screen.c src/tile.c
 OBJ		=	$(FILES:.c=.o)
 
 RM		=	rm -f

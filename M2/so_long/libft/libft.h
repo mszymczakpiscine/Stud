@@ -6,20 +6,20 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 14:22:42 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/15 14:28:29 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/19 11:51:57 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdint.h>
-#include <stdarg.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stddef.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <stdint.h>
+# include <stdarg.h>
+# include <limits.h>
+# include <stdio.h>
+# include <stddef.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

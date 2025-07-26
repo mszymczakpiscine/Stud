@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 19:54:16 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/19 14:35:57 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/07/05 16:15:30 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/07/05 16:17:53 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	ft_putchar(char c)
 {
-	void	*ptr;
-
-	if ((count / 2) * size > SIZE_MAX / 2)
-		return (NULL);
-	ptr = malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	return (write(1, &c, 1));
 }

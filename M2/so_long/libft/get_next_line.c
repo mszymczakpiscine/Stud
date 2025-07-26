@@ -6,7 +6,7 @@
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 12:28:21 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/05/15 14:27:26 by mszymcza         ###   ########.fr       */
+/*   Updated: 2025/07/19 13:49:53 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static int	read_and_read(int fd, char **stock)
 {
 	static char	buffer[BUFFER_SIZE + 1];
-	int		read_bytes;
-	char	*tmp;
+	int			read_bytes;
+	char		*tmp;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
 	if (read_bytes < 0)
@@ -108,4 +108,3 @@ char	*get_next_line(int fd)
 	update_stock(&stock);
 	return (line);
 }
-

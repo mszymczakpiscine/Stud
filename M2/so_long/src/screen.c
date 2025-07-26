@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   sceen.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 19:54:16 by marvin            #+#    #+#             */
-/*   Updated: 2025/07/19 14:35:57 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/07/26 11:44:58 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/07/26 11:45:33 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	put_steps_to_screen(t_game *game)
 {
-	void	*ptr;
+	char	*steps_str;
+	char	*display;
 
-	if ((count / 2) * size > SIZE_MAX / 2)
-		return (NULL);
-	ptr = malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	steps_str = ft_itoa(game->steps);
+	if (!steps_str)
+		return ;
+	display = ft_strjoin("Steps: ", steps_str);
+	free(steps_str);
+	if (!display)
+		return ;
+	mlx_string_put(game->mlx, game->window.ptr, 10, 20, 0xFFFFFF, display);
+	free(display);
 }
