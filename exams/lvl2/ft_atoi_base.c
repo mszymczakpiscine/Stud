@@ -35,3 +35,13 @@ int    ft_atoi_base(const char *str, int base)
 
     return (result * sign);
 }
+
+int	main(void)
+{
+	printf("Hex FF = %d\n", ft_atoi_base("FF", 16));         // 255
+	printf("Bin 1010 = %d\n", ft_atoi_base("1010", 2));      // 10
+	printf("Dec -42 = %d\n", ft_atoi_base("-42", 10));       // -42
+	printf("Base 8 '77' = %d\n", ft_atoi_base("77", 8));     // 63
+	printf("Invalid '1G' = %d\n", ft_atoi_base("1G", 16));   // 1
+	return (0);
+}
