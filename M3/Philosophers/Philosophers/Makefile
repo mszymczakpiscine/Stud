@@ -52,13 +52,12 @@ $(OBJDIR):
 
 clean:
 	@rm -rf $(OBJDIR)
-	@echo "$(RED)[x] Suppression des fichiers objets$(RESET)"
+	@echo "$(RED)[x] Suppression des objets$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(RED)[x] Suppression du binaire $(NAME)$(RESET)"
+	@echo "$(RED)[x] Suppression de ./$(NAME)$(RESET)"
 
 re: fclean all
 
 .PHONY: all clean fclean re header
-
