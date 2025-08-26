@@ -20,7 +20,7 @@ OBJS		= $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 # ─── COMPILER SETTINGS ─────────────────────────────────────────────────────
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I$(INCDIR)
+CFLAGS		= -Wall -Wextra -Werror -I$(INCDIR) -g3
 
 # ─── COLORS ────────────────────────────────────────────────────────────────
 GREEN		= \033[0;32m
@@ -52,13 +52,12 @@ $(OBJDIR):
 
 clean:
 	@rm -rf $(OBJDIR)
-	@echo "$(RED)[x] Suppression des fichiers objets$(RESET)"
+	@echo "$(RED)[x] Suppression des objets$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "$(RED)[x] Suppression du binaire $(NAME)$(RESET)"
+	@echo "$(RED)[x] Suppression de ./$(NAME)$(RESET)"
 
 re: fclean all
 
 .PHONY: all clean fclean re header
-

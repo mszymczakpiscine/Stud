@@ -1,27 +1,64 @@
-//
-// Created by maia on 04/07/25.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 11:57:36 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/08/26 12:05:49 by mszymcza         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "philo.h"
 
-long long current_time() // mesure le temps
+long long current_time()
 {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * 1000LL) + (tv.tv_usec / 1000LL)); //convert second in millisec (LL for long long) & micro in milli
+    return ((tv.tv_sec * 1000LL) + (tv.tv_usec / 1000LL));
 }
 
-void    precise_usleep(long long time) // verif
+void    precise_usleep(long long time)
 {
     long long start = current_time();
     while (current_time() - start < time)
         usleep(100);
 }
 
-void    print_status(t_philo *philo, const char *status) // affiche le status en cours d'execution
+//void    print_status(t_philo *philo, const char *status)
+//{
+//    pthread_mutex_lock(&philo->data->print_mutex);
+//    if (!philo->data->someone_died)
+//        printf("%lld %d %s\n", current_time() - philo->data->start_time, 
+//		philo->id, status);
+//    pthread_mutex_unlock(&philo->data->print_mutex);
+//}
+
+void print_status(t_philo *philo, const char *status)
 {
-    pthread_mutex_lock(&philo->data->print_mutex);
-    if (!philo->data->someone_died) // si aucun philo n'est mort
-        printf("%lld %d %s\n", current_time() - philo->data->start_time, philo->id, status); // calcul le tps ecoule depuis le debut
-    pthread_mutex_unlock(&philo->data->print_mutex);
+    int someone_died;
+
+    pthread_mutex_lock(&philo->data->death_mutex);
+    someone_died = philo->data->someone_died;
+    pthread_mutex_unlock(&philo->data->death_mutex);
+
+    if (!someone_died)
+    {
+        pthread_mutex_lock(&philo->data->print_mutex);
+        printf("%lld %d %s\n", current_time() - philo->data->start_time,
+               philo->id, status);
+        pthread_mutex_unlock(&philo->data->print_mutex);
+    }
+}
+
+int is_dead(t_data *data)
+{
+    int result;
+
+    pthread_mutex_lock(&data->death_mutex);
+    result = data->someone_died;
+    pthread_mutex_unlock(&data->death_mutex);
+
+    return result;
 }
