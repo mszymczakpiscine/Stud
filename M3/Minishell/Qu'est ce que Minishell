@@ -1,0 +1,89 @@
+
+🔍 Qu'est-ce que Minishell ?
+
+Minishell est un projet pédagogique réalisé dans le cadre du cursus de l'École 42. L'objectif principal est de recréer, en langage C, un shell Unix minimaliste — c'est-à-dire un interpréteur de commandes similaire à bash ou zsh, mais limité à un socle de fonctionnalités fondamentales.
+
+    Le shell est l'interface texte par excellence pour interagir avec le système d'exploitation. Il traduit les instructions utilisateur en appels systèmes (syscalls) capables d'exécuter des programmes, manipuler des fichiers, configurer l'environnement logiciel, ou automatiser des suites d'opérations.
+
+Ce projet permet de se confronter à de nombreux aspects essentiels du développement système sous Unix :
+
+    Gestion fine des processus
+    Manipulation des entrées/sorties
+    Parsing lexical complexe
+    Gestion des signaux
+    Manipulation de l'environnement et de la mémoire
+
+🎯 Objectifs & Attentes du Projet
+
+Les objectifs pédagogiques du projet sont multiples :
+
+    Approfondir la programmation système en C (fork, execve, dup2, etc.)
+    Comprendre la gestion avancée des processus et de la mémoire sous Unix/Linux
+    Mettre en œuvre et structurer un parser capable de traiter des commandes complexes
+    Développer une architecture modulaire et robuste
+    Gérer de manière fiable les erreurs, les cas limites, et les signaux asynchrones
+    Respecter une rigueur dans la gestion des ressources système
+
+🛠 Fonctionnalités Développées
+📋 Commandes Internes (Builtins)
+Commande 	Fonctionnalité
+echo 	Affichage de texte avec gestion de l'option -n
+cd 	Changement de répertoire avec gestion du home
+pwd 	Affichage du répertoire courant actualisé
+export / unset 	Manipulation des variables d'environnement
+env 	Affichage de l'environnement courant
+exit 	Fermeture du shell avec code de retour
+🚀 Exécution des Commandes Externes
+
+    Résolution du chemin via la variable $PATH
+    Duplication des arguments et fork/exec sur les commandes non internes
+    Récupération fiable du code de retour
+
+🔄 Redirections & Pipes
+
+# Exemples de redirections supportées
+command > output.txt    # Redirection de sortie
+command >> output.txt   # Redirection en mode append
+command < input.txt     # Redirection d'entrée
+command1 | command2     # Pipe entre deux commandes
+
+    Création et chaînage dynamique de pipes (|)
+    Gestion des file descriptors pour éviter les leaks et collisions
+
+🔧 Variables d'Environnement et Expansions
+
+    Substitution des variables (ex : echo $USER)
+    Support de l'expansion de tilde (~)
+    Prise en charge des quotes simples (') et doubles (")
+    Gestion des cas d'erreurs (variables non définies, etc.)
+
+🏗️ Architecture Technique
+
+Le projet est structuré en deux modules principaux :
+1️⃣ Module de Parsing
+
+[Entrée utilisateur] → [Lexer] → [Parser] → [AST] → [Expansion] → [Exécution]
+
+    Récupération de la commande : lecture du buffer d'entrée
+    Analyse lexicale : découpage en tokens (commande, arguments, opérateurs...)
+    Gestion avancée :
+    Quotes (simples/doubles)
+    Caractères d'échappement
+    Espaces non significatifs entre quotes
+    Erreurs de syntaxe (parenthèses non closes, etc.)
+
+2️⃣ Module d'Exécution
+
+    Expansion : Remplacement des variables ($VAR, $?)
+    Structure de données : Encapsulation de chaque commande
+    Exécution conditionnelle : Gestion des pipes et redirections
+
+🔍 Exemple de Flux d'Exécution
+
+Pour la commande : ls -l | grep test > result.txt
+
+    Parsing en deux structures : ls -l et grep test > result.txt
+    Création d'un pipe entre les deux
+    Redirection de la sortie de grep vers result.txt
+    Exécution parallèle avec synchronisation
+
