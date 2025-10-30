@@ -1,0 +1,34 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/10/30 21:22:44 by mszymcza          #+#    #+#              #
+#    Updated: 2025/10/30 21:22:44 by mszymcza         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRC = megaphone.cpp
+OBJ = $(SRC:.cpp=.o)
+CC = c++
+RM = rm -f
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 
+
+NAME = megaphone
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+
+clean:
+	$(RM) $(OBJ)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean $(NAME)
+
+.PHONY: all clean fclean re
