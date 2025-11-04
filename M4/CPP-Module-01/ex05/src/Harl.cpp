@@ -18,31 +18,27 @@ Harl::Harl()
     _harlInfo[1] = (HarlInfo){"INFO", &Harl::info};
     _harlInfo[2] = (HarlInfo){"WARNING", &Harl::warning};
     _harlInfo[3] = (HarlInfo){"ERROR", &Harl::error};
-    std::cout << "Harl created!" << std::endl;
+    std::cout << "Harl created! Hello i'm Harl\n" << std::endl;
 }
 Harl::~Harl()
 {
-    std::cout << "Harl destroyed!" << std::endl;
+    std::cout << "ARGGGGHHH Harl destroyed!\n... Goodbye from Harl\nI was happy to talk to you\n" << std::endl;
 }
 void   Harl::debug( void )
 {
-    std::cout << "      [DEBUG]"  << std::endl;
-    std::cout << "Debug function called" << std::endl;
+    std::cout << "      [DEBUG]\nDebug function called\n"  << std::endl;
 }
 void    Harl::info( void )
 {
-    std::cout << "      [INFO]" << std::endl;
-    std::cout << "Info function called" << std::endl;
+    std::cout << "      [INFO]\nInfo function called\n" << std::endl;
 }
 void    Harl::warning( void )
 {
-    std::cout << "      [WARNING]" << std::endl;
-    std::cout << "Warning function called" << std::endl;
+    std::cout << "      [WARNING]\nWarning function called\n" << std::endl;
 }
 void    Harl::error( void )
 {
-    std::cout << "      [ERROR]" << std::endl;
-    std::cout << "Error function called" << std::endl;
+    std::cout << "      [ERROR]\nError function called\n" << std::endl;
 }
 
 void    Harl::complain(std::string level)
