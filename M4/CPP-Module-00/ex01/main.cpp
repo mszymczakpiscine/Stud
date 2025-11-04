@@ -24,6 +24,12 @@ int main()
     {
         std::cout << "Enter command (ADD, SEARCH, EXIT): ";
         std::getline(std::cin, command);
+        
+        if (std::cin.eof())
+        {
+            std::cout << std::endl;
+            break;
+        }
 
         if (command == "ADD")
         {
@@ -32,22 +38,32 @@ int main()
 
             std::cout << "First Name: ";
             std::getline(std::cin, input);
+            if (std::cin.eof())
+                break;
             newContact.set_first_name(input);
 
             std::cout << "Last Name: ";
             std::getline(std::cin, input);
+            if (std::cin.eof())
+                break;
             newContact.set_last_name(input);
 
             std::cout << "Nickname: ";
             std::getline(std::cin, input);
+            if (std::cin.eof())
+                break;
             newContact.set_nickname(input);
 
             std::cout << "Phone Number: ";
             std::getline(std::cin, input);
+            if (std::cin.eof())
+                break;
             newContact.set_phone_number(input);
 
             std::cout << "Darkest Secret: ";
             std::getline(std::cin, input);
+            if (std::cin.eof())
+                break;
             newContact.set_darkest_secret(input);
 
             if (newContact.is_valid())
@@ -57,18 +73,15 @@ int main()
         }
         else if (command == "SEARCH")
         {
-            std::string query;
-            std::cout << "Enter search query (first name, last name, or nickname): ";
-            std::getline(std::cin, query);
-            phoneBook.search_contact(query);
+            phoneBook.search_contacts();
         }
         else if (command == "EXIT")
         {
             break;
         }
-        else
+        else if (!command.empty())
         {
-            std::cout << "Invalid command. Please try again." << std::endl;
+            std::cout << "Unknown command. Please use ADD, SEARCH, or EXIT." << std::endl;
         }
     }
     return 0;

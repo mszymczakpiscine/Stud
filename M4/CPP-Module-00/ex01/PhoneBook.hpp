@@ -26,7 +26,7 @@ private:
 public:
     PhoneBook();
     void add_contact(const Contact& contact);
-    void search_contact(const std::string& query) const;
+    void search_contacts() const;
     ~PhoneBook();
 };
 

@@ -16,7 +16,7 @@ Contact::Contact()
 {
     this->first_name = "";
     this->last_name = "";
-    this->nickename = "";
+    this->nickname = "";
     this->phone_number = "";
     this->darkest_secret = "";
 }   
@@ -40,11 +40,11 @@ std::string Contact::get_last_name() const
 }
 void    Contact::set_nickname(const std::string& str)
 {
-    this->nickename = str;
+    this->nickname = str;
 }
 std::string Contact::get_nickname() const
 {
-    return this->nickename;
+    return this->nickname;
 }
 
 void    Contact::set_phone_number(const std::string& str)
@@ -70,7 +70,7 @@ bool    Contact::is_valid() const
 {
     return !this->first_name.empty() &&
            !this->last_name.empty() &&
-           !this->nickename.empty() &&
+           !this->nickname.empty() &&
            !this->phone_number.empty() &&
            !this->darkest_secret.empty();
 }
