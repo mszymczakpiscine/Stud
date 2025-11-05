@@ -5,16 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 12:02:08 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/11/05 12:05:57 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/11/05 20:41:37 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/11/05 20:41:37 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRONGCAT_HPP
 #define WRONGCAT_HPP
-
-#include <iostream>
-#include "WrongAnimal.hpp"
 
 // Color codes
 #define RESET   "\033[0m"
@@ -26,20 +23,17 @@
 #define NRED    "\033[1;31m"
 #define NBLUE   "\033[1;34m"
 
-class WrongCat
+#include "WrongAnimal.hpp"
+
+class WrongCat : public WrongAnimal
 {
 	public:
 		WrongCat();
-		WrongCat(std::string type);
-		WrongCat(WrongCat const &src);
+		WrongCat(const WrongCat& other);
+		WrongCat& operator=(const WrongCat& other);
+		~WrongCat();
 
-		virtual ~WrongCat;
-
-		WrongCat &operator=(const WrongCat &src);
-
-		std::string		getType() const ;
-		void			set_type(std::string type);
-		void			makeSound() const ;
+		void makeSound() const;  // NOT virtual
 };
 
 #endif

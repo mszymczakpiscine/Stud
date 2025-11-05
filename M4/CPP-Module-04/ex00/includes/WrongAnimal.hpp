@@ -5,15 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 11:52:32 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/11/05 11:56:27 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/11/05 20:41:27 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/11/05 20:41:27 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRONGANIMAL_HPP
 #define WRONGANIMAL_HPP
-
-#include <iostream>
 
 // Color codes
 #define RESET   "\033[0m"
@@ -25,23 +23,22 @@
 #define NRED    "\033[1;31m"
 #define NBLUE   "\033[1;34m"
 
+#include <string>
+#include <iostream>
 
 class WrongAnimal
 {
+	protected:
+		std::string type;
+
 	public:
 		WrongAnimal();
-		WrongAnimal(std::string type);
-		WrongAnimal(WrongAnimal const *src);
-		
-		virtual ~WrongAnimal();
-		WrongAnimal &operator=(const WrongAnimal &src);
-		
-		std::string		getType() const ;
-		void			set_type(std::string type);
-		void			makeSound() const ;
+		WrongAnimal(const WrongAnimal& other);
+		WrongAnimal& operator=(const WrongAnimal& other);
+		~WrongAnimal();
 
-	protected:
-		std::string _type;
+		void makeSound() const;  // NOT virtual
+		std::string getType() const;
 };
 
 #endif

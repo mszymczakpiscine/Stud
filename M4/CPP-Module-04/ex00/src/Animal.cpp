@@ -5,57 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 11:17:37 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/11/05 13:31:54 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/11/05 20:43:41 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/11/05 20:43:41 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Animal::Animal()
+Animal::Animal() : type("Animal")
 {
-	_type = "I don't know this animal\n";
-	std::cout << BLUE << "Animal Default Constructor called" << RESET << std::endl;
+	std::cout << GREEN << "🦁 Animal default constructor called" << RESET << std::endl;
 }
 
-Animal::Animal(std::string name)
+Animal::Animal(const Animal& other) : type(other.type)
 {
-	_type = name;
-	std::cout << BLUE << "Animal Constructor called with attribute type : " << name << RESET << std::endl;	
+	std::cout << GREEN << "🦁 Animal copy constructor called" << RESET << std::endl;
 }
 
-Animal::Animal(const Animal &src)
+Animal& Animal::operator=(const Animal& other)
 {
-	std::cout << YELLOW << "Animal Copy Constructor called" << RESET << std::endl;
-	*this = src;
-}
-
-Animal::~Animal()
-{
-	std::cout << RED << "Animal Destructor called" << RESET << std::endl;
-}
-
-Animal &Animal::operator=(Animal const &other)
-{
-	std::cout << PURPLE << "Animal Copy assignment operator called" << RESET << std::endl;
+	std::cout << GREEN << "🦁 Animal assignment operator called" << RESET << std::endl;
 	if (this != &other)
 	{
-		this->_type = other._type;
+		this->type = other.type;
 	}
 	return *this;
 }
 
-void	Animal::set_type(std::string type)
+Animal::~Animal()
 {
-	_type = type;
+	std::cout << GREEN << "🦁 Animal destructor called" << RESET << std::endl;
+}
+
+void Animal::makeSound() const
+{
+	std::cout << GREEN << "🦁 * Generic animal sound *" << RESET << std::endl;
 }
 
 std::string Animal::getType() const
 {
-	return _type;
-}
-
-void	Animal::makeSound() const 
-{
-	std::cout << GREEN << _type << "Make some noisy sound\n" << RESET << std::endl;
+	return this->type;
 }

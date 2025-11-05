@@ -5,15 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 11:09:54 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/11/05 11:22:49 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/11/05 20:40:54 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/11/05 20:40:54 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
-
-#include <iostream>
 
 // Color codes
 #define RESET   "\033[0m"
@@ -24,25 +22,22 @@
 #define PURPLE  "\033[35m"
 #define NRED    "\033[1;31m"
 #define NBLUE   "\033[1;34m"
-
+#include <string>
+#include <iostream>
 
 class Animal
 {
+	protected:
+		std::string type;
+
 	public:
 		Animal();
-		Animal(std::string name);
-		Animal(const Animal &src);
-		
+		Animal(const Animal& other);
+		Animal& operator=(const Animal& other);
 		virtual ~Animal();
-		
-		Animal &operator=(Animal const &other);
-		
-		virtual void makeSound() const ;
-		void		 set_type(std::string type);
-		std::string  getType() const ;
 
-	protected:
-		std::string _type;
+		virtual void makeSound() const;
+		std::string getType() const;
 };
 
 #endif

@@ -5,16 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 11:30:53 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/11/05 11:44:11 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/11/05 20:41:01 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/11/05 20:41:01 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CAT_HPP
 #define CAT_HPP
-
-//#include <iostream>
-#include "Animal.hpp"
 
 // Color codes
 #define RESET   "\033[0m"
@@ -26,18 +23,17 @@
 #define NRED    "\033[1;31m"
 #define NBLUE   "\033[1;34m"
 
-class Cat
+#include "Animal.hpp"
+
+class Cat : public Animal
 {
 	public:
 		Cat();
-		Cat(std::string name);
-		Cat(const Cat &src);
-		
-		virtual ~Cat();
-		Cat &operator=(Cat const &other);
-		virtual void	makeSound() const;
-		void			set_type(std::string type);
-		std::string		getType() const;
+		Cat(const Cat& other);
+		Cat& operator=(const Cat& other);
+		~Cat();
+
+		void makeSound() const;
 };
 
 #endif

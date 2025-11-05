@@ -5,57 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/05 11:49:34 by mszymcza          #+#    #+#             */
-/*   Updated: 2025/11/05 12:00:47 by mszymcza         ###   ########.fr       */
+/*   Created: 2025/11/05 20:43:51 by mszymcza          #+#    #+#             */
+/*   Updated: 2025/11/05 20:43:51 by mszymcza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Dog.hpp"
-
-Dog::Dog(): Animal()
-{
-	_type = "Dog\n";
-	std::cout << BLUE << "Dog Default Constructor called" << RESET << std::endl;
-}
-
-Dog::Dog(std::string type): Animal(type)
-{
-	_type = type;
-	std::cout << BLUE << "Dog Constructor called with attribute type : " << type << RESET << std::endl;	
-}
-
-Dog::Dog(const Dog &src): Animal(src)
-{
-	std::cout << YELLOW << "Dog Copy Constructor called" << RESET << std::endl;
-	*this = src;
-}
+#include "Dog.hpp"
 
 Dog::Dog()
 {
-	std::cout << RED << "Dog Destructor called" << RESET << std::endl;
+	this->type = "Dog";
+	std::cout << BLUE << "🐕 Dog default constructor called" << RESET << std::endl;
 }
 
-Dog &Dog::operator=(Dog const &other)
+Dog::Dog(const Dog& other) : Animal(other)
 {
-	std::cout << PURPLE << "Dog Copy assignment operator called" << RESET << std::endl;
+	std::cout << BLUE << "🐕 Dog copy constructor called" << RESET << std::endl;
+}
+
+Dog& Dog::operator=(const Dog& other)
+{
+	std::cout << BLUE << "🐕 Dog assignment operator called" << RESET << std::endl;
 	if (this != &other)
 	{
-		this->_type = other._type;
+		Animal::operator=(other);
 	}
 	return *this;
 }
 
-void	Dog::set_type(std::string type)
+Dog::~Dog()
 {
-	_type = type;
+	std::cout << BLUE << "🐕 Dog destructor called" << RESET << std::endl;
 }
 
-std::string Dog::getType() const
+void Dog::makeSound() const
 {
-	return _type;
-}
-
-void	Dog::makeSound() const 
-{
-	std::cout << GREEN << _type << "WAAAFFFFF\n" << RESET << std::endl;
+	std::cout << BLUE << "🐕 Woof! Woof!" << RESET << std::endl;
 }

@@ -5,27 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mszymcza <mszymcza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/11/05 11:07:46 by mszymcza          #+#    #+#              #
-#    Updated: 2025/11/05 12:20:51 by mszymcza         ###   ########.fr        #
+#    Created: 2025/11/04 13:47:03 by mszymcza          #+#    #+#              #
+#    Updated: 2025/11/04 13:47:03 by mszymcza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= Animal
+NAME		= Polimorphism
 
 CXX			= c++
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -Iincludes 
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -Iincludes -Wno-implicit-fallthrough
 
 SRCS		= main.cpp \
 			  src/Animal.cpp \
 			  src/Cat.cpp \
 			  src/Dog.cpp \
-			  src/WrongAnimal.cpp\
+			  src/WrongAnimal.cpp \
 			  src/WrongCat.cpp
-			  
 
 OBJS		= $(SRCS:.cpp=.o)
 
-HEADERS		= includes/Animal.hpp includes/Cat.hpp includes/Dog.hpp includes/WrongAnimal.hpp includes/WrongCat.hpp
+HEADERS		= includes/Animal.hpp \
+			  includes/Cat.hpp \
+			  includes/Dog.hpp \
+			  includes/WrongAnimal.hpp \
+			  includes/WrongCat.hpp
 
 GREEN		= \033[0;32m
 RED			= \033[0;31m
