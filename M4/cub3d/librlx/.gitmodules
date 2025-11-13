@@ -1,0 +1,3 @@
+[submodule "minilibx-linux"]
+	path = minilibx-linux
+	url = ssh://git@git.adrienheisch.com:2222/AdrienHeisch/minilibx-linux.git
